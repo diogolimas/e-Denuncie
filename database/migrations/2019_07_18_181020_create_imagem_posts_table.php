@@ -18,8 +18,8 @@ class CreateImagemPostsTable extends Migration
             $table->string('nome');
             $table->string('descricao');
             $table->string('arquivo');
-            $table->integer('post_id');
-            $table->foreign('post_id')->references('id')->on('post');
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();
         });
     }

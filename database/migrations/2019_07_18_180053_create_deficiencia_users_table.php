@@ -15,10 +15,10 @@ class CreateDeficienciaUsersTable extends Migration
     {
         Schema::create('deficiencia_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('deficiencia_id');
-            $table->foreign('deficiencia_id')->references('id')->on('deficiencias');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('deficiencia_id');
+            $table->foreign('deficiencia_id')->references('id')->on('deficiencias')->onDelete('cascade');
             $table->timestamps();
         });
     }
