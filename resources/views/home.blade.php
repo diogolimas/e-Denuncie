@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <!-- <h1>Dashboard</h1> -->
 @stop
 
 @section('content')
@@ -13,14 +13,24 @@
             {{$success}}
         </div>
     @endif
-        <form action="{{route('postar.denuncia')}}" method="post">
-                {!!csrf_field()!!}
-                <input type="text" placeholder="Digite a sua denúncia" name="descricao">
-                <input type="file" name="imagem" accept="image/*">
-                <button type="submit">Postar</button>
-        </form>
-
+        
         <div class="posts-container">
+            <div class="send-form">
+                <form action="{{route('postar.denuncia')}}" method="post">
+                    {!!csrf_field()!!}
+                    <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
+
+                    <div class="send-form-sends">
+                        <span class="btn btn-primary btn-file">
+                            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                            <input type="file" name="imagem" accept="image/*">
+                        </span>
+                        <button type="submit" class="btn btn-success">Postar</button>
+                    </div>
+                    
+                </form>
+            </div>
+
             <div class="posts">
                 <div class="post">
                     <div class="post-header">
@@ -87,6 +97,35 @@
                     <div class="post-footer">
                         <div class="post-footer-desc">
 
+                        </div>
+                        <div class="post-footer-ups">
+                            <div class="post-footer-time">
+                                Hoje, 19:34
+                            </div>
+                            <div class="post-footer-up">
+                                <span class="glyphicon glyphicon-menu-up glypS glyp" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-menu-up glypM glyp" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-menu-up glypL glyp" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="posts">
+                <div class="post">
+                    <div class="post-header">
+                        <p class="post-header-name">Daniel Victor</p>
+                        <div class="post-header-ups">
+                            <span>98</span>
+                            <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="post-photo">
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-footer-desc">
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                         </div>
                         <div class="post-footer-ups">
                             <div class="post-footer-time">
