@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Deficiencia extends Model
+class Like_comment extends Model
 {
     //
 }
