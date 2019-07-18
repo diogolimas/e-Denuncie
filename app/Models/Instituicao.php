@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Instituicao extends Model
 {
-    //
+    protected $fillable = [
+        'nome', 'cnpj', 'sigla', 'login', 'senha'
+    ];
 }

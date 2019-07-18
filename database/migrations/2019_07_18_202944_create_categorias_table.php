@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDeficienciasTable extends Migration
+class CreateCategoriasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateDeficienciasTable extends Migration
      */
     public function up()
     {
-        Schema::create('deficiencias', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->string('sigla')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateDeficienciasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deficiencias');
+        Schema::dropIfExists('categorias');
     }
 }

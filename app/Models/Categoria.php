@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Deficiencia_user extends Model
+class Categoria extends Model
 {
     protected $fillable = [
-        'user_id', 'deficiencia_id'
+        'nome'
     ];
 }
