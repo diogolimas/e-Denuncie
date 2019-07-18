@@ -16,7 +16,7 @@ class CreateDeficienciasTable extends Migration
         Schema::create('deficiencias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->string('sigla');
+            $table->string('sigla')->nullable();
             $table->timestamps();
         });
     }
