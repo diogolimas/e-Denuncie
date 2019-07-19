@@ -70,13 +70,16 @@ class PostController extends Controller
             }
         }
     }
-    public function upPost(Request $request, $id){
+    public function upPost(){
+        $id = $_POST['id'];
+        $ups = $_POST['ups'];
+        return $ups;
         if (auth()->user()->table == 'users') $tipo = 'user_id';
         else $tipo = 'instituicao_id';
         Up_post::create([
             $tipo => auth()->user()->id,
             'post_id' => $id,
-            'ups' => $request->ups,
+            'ups' => $ups,
         ]);
 
 
@@ -86,8 +89,10 @@ class PostController extends Controller
            'nome' => $request->descricao,
         ]);
     }
-    public function upCount($id){
+    public function upCount(){
+        $id = $_POST['id'];
         $ups = Up_post::where('post_id',$id)->sum('ups');
+        return $ups;
     }
 
     /**
@@ -113,7 +118,7 @@ class PostController extends Controller
         $success = $request->success;
         $nome = 'asd';
         $comments = Comment::all();
-
+        $users = null;
         foreach ($comments as $comment){
             if ($comment->user_id != '') $user = User::find($comment->user_id);
             else $user = User::find($comment->instituicao_id);
