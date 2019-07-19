@@ -26,7 +26,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, Post $post)
     {
         $nameFile = '';
         $originalName = '';
@@ -37,6 +37,7 @@ class PostController extends Controller
             $nameFile = "{$name}.{$extension}";
         }
 
+        $this->validate($request, $post->rules);
         
         $insertarpost = Post::create([
             'descricao' => $request->descricao,
