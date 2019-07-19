@@ -52,7 +52,7 @@
         <div class="post-comment">
             <div class="send-form post-comments-c">
 
-                <form action="{{route('comentar.denuncia')}}" method="post">
+                <form action="{{route('comentar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <input type="hidden" name="post_id" value="{{$id}}">
                     <textarea name="descricao" class="send-form-text" rows="2" placeholder="Digite um comentário"></textarea>
