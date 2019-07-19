@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $success = $request->success;
+        
         return view('home', compact('success'));
     }
 }
