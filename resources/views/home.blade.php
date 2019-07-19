@@ -19,7 +19,10 @@
                 <form action="{{route('postar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
-                    <input type="text" name="descricaoImagem" id="">    
+                    <div class="form-group">
+                        <label class="label-desc">Descrição da imagem:</label>
+                        <input type="text" class="form-control" name="descricaoImagem" id="">
+                    </div>    
                     <div class="send-form-sends">
                         <span class="btn btn-primary btn-file">
                             <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
