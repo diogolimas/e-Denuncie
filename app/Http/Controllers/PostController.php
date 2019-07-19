@@ -28,16 +28,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, Post $post)
     {
         $nameFile = '';
         $originalName = '';
-        if(isset($request->imagem)){
+        if(isset($request->imagem)) {
             $originalName = $request->imagem->getClientOriginalName();
             $name = time();
             $extension = $request->imagem->extension();
             $nameFile = "{$name}.{$extension}";
+            $this->validate($request, $post->rules);
         }
+
         $insertarpost = Post::create([
             'descricao' => $request->descricao,
             'user_id'   => auth()->user()->id,
@@ -55,11 +57,11 @@ class PostController extends Controller
         if($insertarpost){
             if(isset($insertarimagem)){
                 $request->imagem->storeAs('posts', $nameFile);
+
                 return redirect()->route('home',['success' => 'Post publicado com sucesso']);
             }else{
                 return redirect()->route('home',['success' => 'Post publicado com sucesso']);
             }
-
         }
     }
     public function upPost(Request $request, $id){
@@ -101,7 +103,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $nome = 'asd';
+        return view('post', compact('id','nome'));
     }
 
     /**
