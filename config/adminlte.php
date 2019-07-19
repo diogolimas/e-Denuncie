@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => '',
 
     'title_prefix' => '',
 
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
 
     'logout_url' => 'logout',
 
@@ -108,81 +108,66 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'Principal',
         [
-            'text' => 'Blog',
+            'text' => '',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Pages',
+            'text'        => 'Página inicial',
             'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'icon'        => 'home',
+            
+            
         ],
-        'ACCOUNT SETTINGS',
+        'Sobre',
         [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
+            'text' => '',
+            'url'  => 'admin/blog',
+            'can'  => 'manage-blog',
         ],
         [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
+            'text'        => 'Minhas publicações',
+            'url'         => 'admin/pages',
+            'icon'        => 'user',
+            
+            
+        ],
+        'tipos de publicação',
+ 
+        [
+            'text'    => 'Categorias',
+            'icon'    => 'list-alt',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Mobilidade urbana',
+                    'url'  => '',
                 ],
                 [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text'    => 'Serviço de saúde',
+                    'url'     => '',
+
                 ],
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Acessibilidade virtual',
+                    'url'  => '',
+                ],
+                [
+                    'text' => 'Educação',
+                    'url'  => '',
+                ],
+                [
+                    'text' => 'Segurança',
+                    'url'  => '',
+                ],
+                [
+                    'text' => 'Outros',
+                    'url'  => '',
                 ],
             ],
         ],
-        'LABELS',
-        [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
-        ],
+        
     ],
 
     /*
