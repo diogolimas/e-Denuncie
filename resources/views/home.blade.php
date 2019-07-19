@@ -26,7 +26,10 @@
                 <form action="{{route('postar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
-                    <input type="text" name="descricaoImagem" id="">    
+                    <div class="form-group">
+                        <label class="label-desc">Descrição da imagem:</label>
+                        <input type="text" class="form-control" name="descricaoImagem" id="">
+                    </div>
                     <div class="send-form-sends">
                         <span class="btn btn-primary btn-file">
                             <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
@@ -36,6 +39,7 @@
                     </div>
                     
                 </form>
+<<<<<<< HEAD
                 <form action="{{route('comentar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <input type="text" name="descricao" id="" placeholder="digita aqui kkkkk">
@@ -45,6 +49,9 @@
                     </div>
 
                 </form>
+=======
+                
+>>>>>>> 4f2fe353fa56a05ee5138309f59414d7d3bc96f0
             </div>
 
             @if(isset($posts))
@@ -69,17 +76,27 @@
                     @foreach ($imagensPost as $imagem)
                     
                         @if($imagem->post_id == $postItem->id)
+<<<<<<< HEAD
                         
                             <div class="post-photo">
                                 <img src="{{ url("/storage/posts/{$imagem->arquivo}") }}" alt="{{$postItem->descricao}}">
+=======
+                            <a href="{{route('post.comment', ['id'=>$postItem->id])}}">
+                            <div class="post-photo" >
+                                <img src="{{ url("/storage/{$imagem->arquivo}") }}" alt="{{$postItem->descricao}}">
+>>>>>>> 4f2fe353fa56a05ee5138309f59414d7d3bc96f0
                             </div>
+                            </a>
                              
                         @endif
                         @endforeach
+                        
                             <div class="post-footer">
+                            <a href="{{route('post.comment', ['id'=>$postItem->id])}}">
                                 <div class="post-footer-desc" >
                                     {{$postItem->descricao}}    
                                 </div>
+                            </a>
                    
                     @else
 

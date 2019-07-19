@@ -11,6 +11,8 @@ use App\Models\Imagem_post;
 use App\Models\Categoria;
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Response;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
@@ -21,7 +23,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $msg = "this is";
+        return response()->json(array('msg'=>$msg), 200);
     }
 
     /**
@@ -38,8 +41,9 @@ class PostController extends Controller
             $name = time();
             $extension = $request->imagem->extension();
             $nameFile = "{$name}.{$extension}";
-            $this->validate($request, $post->rules);
         }
+
+        $this->validate($request, $post->rules);
 
         $insertarpost = Post::create([
             'descricao' => $request->descricao,

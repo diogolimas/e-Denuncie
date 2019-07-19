@@ -23,6 +23,9 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('/comentar','CommentController@create')->name('comentar.denuncia');
 
     Route::get('/post/{id}/comments', 'PostController@show')->name('post.comment');
+
+    //
+    Route::post('/getmsg','PostController@index')->name('teste');
 });
 
 
