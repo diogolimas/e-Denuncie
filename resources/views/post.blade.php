@@ -18,7 +18,7 @@
             <div class="post">
                 <div class="post-header">
                     <span class="post-header-span-user">
-                        <p class="post-header-name">Daniel Victor</p>
+                        <p class="post-header-name">{{$author_post->name}}</p>
                         <span class="glyphicon glyphicon-user glyp-header-user" title="Dono da publicação" aria-hidden="true"></span>
                     </span>
                     <div class="post-header-ups">
@@ -30,10 +30,15 @@
                     </div>
                 </div>
                 <div class="post-photo">
+                    @if(isset($imagemPost))
+                        <div class="post-photo">
+                            <img src="{{ url("/storage/post/{$imagem->arquivo}") }}" alt="{{$comment->descricao}}">
+                        </div>
+                    @endif
                 </div>
                 <div class="post-footer">
                     <div class="post-footer-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula nisl egestas pretium congue. Vivamus hendrerit orci enim, nec euismod augue cursus ut. Proin quis ornare metus. Donec facilisis viverra dolor sed porttitor. Maecenas et turpis molestie arcu rutrum euismod.
+                        {{$post->descricao}}
                     </div>
                     <div class="post-footer-ups">
                         <div class="post-footer-time">
