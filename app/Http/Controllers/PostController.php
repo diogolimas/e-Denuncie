@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\User;
+use DB;
 use App\Models\Post;
 use App\Models\Up_post;
 use App\Models\Imagem_post;
@@ -111,16 +112,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $imagensComment = DB::table('imagem_comments')->get();
+        $success = $request->success;
         $nome = 'asd';
         $comments = Comment::all();
+
         foreach ($comments as $comment){
             if ($comment->user_id != '') $user = User::find($comment->user_id);
             else $user = User::find($comment->instituicao_id);
             $users[$user->id] = $user->name;
         }
-        return view('post', compact('id','nome', 'comments', 'users'));
+        return view('post', compact('id','nome', 'comments', 'users','imagensComment','success'));
     }
 
     /**

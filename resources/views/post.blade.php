@@ -51,7 +51,8 @@
 
         <div class="post-comment">
             <div class="send-form post-comments-c">
-                <form action="{{route('comentar.denuncia')}}" method="post">
+
+                <form action="{{route('comentar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <input type="hidden" name="post_id" value="{{$id}}">
                     <textarea name="descricao" class="send-form-text" rows="2" placeholder="Digite um comentário"></textarea>
@@ -79,6 +80,17 @@
                         <span class="glyphicon glyphicon-user glyp-owner" title="Dono da publicação" aria-hidden="true"></span>
                     </div>
                     <div class="comment-comment">{{$comment->descricao}}</div>
+                    @if(isset($imagensComment))
+                        @foreach ($imagensComment as $imagem)
+                            @if($imagem->comment_id == $comment->id)
+                                <div class="post-photo">
+                                    <img src="{{ url("/storage/comments/{$imagem->arquivo}") }}" alt="{{$comment->descricao}}">
+
+                                </div>
+
+                            @endif
+                        @endforeach
+                    @endif
                     <div class="comment-footer">
                         <span class="glyphicon glyphicon-thumbs-up glyp-like" title="Gostei" aria-hidden="true"></span>
                         <span>122</span>
@@ -86,6 +98,6 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+
     </div>
 @stop

@@ -8,6 +8,7 @@ use App\Models\Like_comment;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Http\Controllers\Auth;
+use Intervention\Image\Facades\Image as Image;
 use App\User;
 
 class CommentController extends Controller
@@ -41,6 +42,7 @@ class CommentController extends Controller
         $originalName = '';
         $insertarimagem = null;
         if(isset($request->imagem)){
+            
             $originalName = $request->imagem->getClientOriginalName();
             $name = time();
             $extension = $request->imagem->extension();
@@ -57,7 +59,7 @@ class CommentController extends Controller
 
         if($comentar) {
             if ($insertarimagem)
-                $request->imagem->storeAs('posts', $nameFile);
+                $request->imagem->storeAs('comments', $nameFile);
             return redirect()->back()->with(['success' => 'Comentário publicado com sucesso']);
         }
         else
