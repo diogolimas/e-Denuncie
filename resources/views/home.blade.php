@@ -58,7 +58,7 @@
                                 @endif
                             @endforeach
                         </p>
-                        <div class="post-header-ups"><span>98 </span>UP's</div>
+                        <div class="post-header-ups"><span id="ups_post{{$postItem->id}}" >0</span>UP's</div>
                     </div>
                     @if(isset($imagensPost))
                     @foreach ($imagensPost as $imagem)
@@ -88,9 +88,9 @@
                                 {{$postItem->created_at}}
                             </div>
                             <div class="post-footer-up">
-                                <span class="glyphicon glyphicon-menu-up glypS glyp" aria-hidden="true"></span>
-                                <span class="glyphicon glyphicon-menu-up glypM glyp" aria-hidden="true"></span>
-                                <span class="glyphicon glyphicon-menu-up glypL glyp" aria-hidden="true"></span>
+                                <button data-id_post="{{$postItem->id}}" id="sUP" class="glyphicon glyphicon-menu-up glypS glyp" aria-hidden="true"></button>
+                                <button data-id_post="{{$postItem->id}}" id="mUP" class="glyphicon glyphicon-menu-up glypM glyp" aria-hidden="true"></button>
+                                <button data-id_post="{{$postItem->id}}" id="lUP" class="glyphicon glyphicon-menu-up glypL glyp" aria-hidden="true"></button>
                             </div>
                         </div>
                     </div>

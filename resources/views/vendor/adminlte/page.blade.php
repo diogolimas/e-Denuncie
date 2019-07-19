@@ -140,27 +140,55 @@
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             }
         });
-        function getMessage(){
-        $.post("{{route('teste')}}", function(data){
-            $("#msg").html(data.msg);
-        });
-        }
-    function getMessagea() {
-            alert('a')
-            $.ajax({
-                type:'POST',
-                url:'/getmsg',
-                data:'_token = <?php echo csrf_token() ?>',
-                success:function(data) {
-                    $("#msg").html(data.msg);
-                }
+
+        function getUps(id = null){
+            $.post("{{route('api.getups')}}", {id}, function(data){
+                alert(data);
+                return data;
+                /*
+                alert(data)
+                console.log(data)
+                $("#msg").html(data.msg);*/
             });
         }
+
+        function setUps(id = null, ups){
+            $.post("{{route('api.setups')}}", {id,ups}, function(data){
+                alert(data);
+                // let span = 'span#ups_post'+id; 
+                // $(span).text(parseInt(getUps());
+            });
+        }
+
     $(function() {
         $('#msg').click(function(){
-            getMessage();
+            getUps(1);
         });
 
+        $('button#lUP').click(function(e){
+            e.preventDefault();
+            
+            let idpost = $(this).data('id_post');
+            let span = 'span#ups_post'+idpost; 
+            setUps(idpost,3);
+            // $(span).text(parseInt($(span).text())+3);
+        });
+
+        $('button#mUP').click(function(e){
+            e.preventDefault();
+            
+            let idpost = $(this).data('id_post');
+            let span = 'span#ups_post'+idpost; 
+            $(span).text(parseInt($(span).text())+2);
+        });
+
+        $('button#sUP').click(function(e){
+            e.preventDefault();
+            
+            let idpost = $(this).data('id_post');
+            let span = 'span#ups_post'+idpost; 
+            $(span).text(parseInt($(span).text())+1);
+        });
         
     });
 
