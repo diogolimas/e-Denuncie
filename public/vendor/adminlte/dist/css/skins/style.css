@@ -10,10 +10,22 @@
     .send-form {
         width: 100% !important;
     }
+    .comments {
+        width: 100% !important;
+    }
 }
 
 .post {
     color: #FFFFFF;
+}
+
+.post-comments {
+    margin: 0;
+    border-bottom: 2px solid #F3F3F3;
+}
+
+.post-comments-c {
+    margin-bottom: 15px !important;
 }
 
 .posts-container {
@@ -37,12 +49,41 @@
 .post-header-ups {
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+.post-header-option {
+    margin-left: 15px;
+    cursor: pointer;
+    border-radius: 100%;
+    padding: 5px;
+    padding-left: 6px;
+    padding-bottom: 6px;
+}
+
+.post-header-option:hover {
+    background-color: #0d5080;
+}
+
+.post-header-ups-up {
+    margin-left: 5px;
 }
 
 .post-header-name {
     font-size: 16px;
     margin: 0;
     padding: 0;
+}
+
+.post-header-span-user {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.glyp-header-user {
+    margin-left: 5px;
+    cursor: pointer;
 }
 
 .post-photo > img {
@@ -61,21 +102,25 @@
 }
 
 .glyp {
-    padding: 3px !important;
+    padding: 5px !important;
+    cursor: pointer;
+    color: #2c2c2c;
+}
+
+.glyp:hover {
+    background-color: #f3f3f3;
+    border-radius: 100%;
 }
 
 .glypS {
-    color: black !important;
     font-size: 12px;
 }
 
 .glypM {
-    color: black !important;
     font-size: 17px;
 }
 
 .glypL {
-    color: black !important;
     font-size: 22px;
 }
 
@@ -113,4 +158,77 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.comments {
+    width: 500px;
+}
+
+.comment {
+    background: #FFF;
+    border-radius: 3px;
+    padding:  15px 30px;
+    color: #0d6aad;
+    border-bottom: 2px solid #0d6aad;
+    margin-bottom: 15px;
+    word-wrap: break-word;
+}
+
+.comment-user {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.comment-owner {
+    border-bottom: 2px solid green;
+}
+
+.comment-comment {
+    margin-left: 10px;
+}
+
+.glyp-oficial {
+    font-size: 14px;
+    color: #0d6aad;
+    cursor: pointer;
+}
+
+.glyp-owner {
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.glyp-like {
+    cursor: pointer;
+}
+
+.glyp-like:hover {
+    color: green;
+}
+
+.glyp-dislike {
+    cursor: pointer;
+}
+
+.glyp-dislike:hover {
+    color: red;
+}
+
+.comment-footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    padding-top: 10px;
+    align-items: center;
+}
+
+.comment-footer > span {
+    margin: 0 5px;
+}
+
+.label-desc {
+    color: #2c2c2c;
+    font-weight: 400;
 }
