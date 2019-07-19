@@ -64,17 +64,21 @@
                     @foreach ($imagensPost as $imagem)
                     
                         @if($imagem->post_id == $postItem->id)
-                        
-                            <div class="post-photo">
+                            <a href="{{route('post.comment', ['id'=>$postItem->id])}}">
+                            <div class="post-photo" >
                                 <img src="{{ url("/storage/{$imagem->arquivo}") }}" alt="{{$postItem->descricao}}">
                             </div>
+                            </a>
                              
                         @endif
                         @endforeach
+                        
                             <div class="post-footer">
+                            <a href="{{route('post.comment', ['id'=>$postItem->id])}}">
                                 <div class="post-footer-desc" >
                                     {{$postItem->descricao}}    
                                 </div>
+                            </a>
                    
                     @else
 
