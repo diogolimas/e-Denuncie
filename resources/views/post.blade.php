@@ -51,6 +51,9 @@
 
         <div class="post-comment">
             <div class="send-form post-comments-c">
+<<<<<<< HEAD
+                <form action="{{route('comentar.denuncia')}}" method="post">
+=======
                 <!-- <form action="{{route('comentar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <input type="text" name="descricao" id="" placeholder="digita aqui kkkkk">
@@ -61,7 +64,9 @@
 
                 </form> -->
                 <form action="" method="post">
+>>>>>>> 4f2fe353fa56a05ee5138309f59414d7d3bc96f0
                     {!!csrf_field()!!}
+                    <input type="hidden" name="post_id" value="{{$id}}">
                     <textarea name="descricao" class="send-form-text" rows="2" placeholder="Digite um comentário"></textarea>
                     <div class="form-group">
                         <label class="label-desc">Descrição da imagem:</label>
@@ -78,44 +83,22 @@
                 </form>
             </div>
         </div>
-
         <div class="comments">
             <p>Comentários</p>
-            <div class="comment">
-                <div class="comment-user">
-                    Daniel Victor
-                    <span class="glyphicon glyphicon-user glyp-owner" title="Dono da publicação" aria-hidden="true"></span>
+            @foreach ($comments as $comment)
+                <div class="comment">
+                    <div class="comment-user">
+                        {{$users[$comment->user_id]}}
+                        <span class="glyphicon glyphicon-user glyp-owner" title="Dono da publicação" aria-hidden="true"></span>
+                    </div>
+                    <div class="comment-comment">{{$comment->descricao}}</div>
+                    <div class="comment-footer">
+                        <span class="glyphicon glyphicon-thumbs-up glyp-like" title="Gostei" aria-hidden="true"></span>
+                        <span>122</span>
+                        <span class="glyphicon glyphicon-thumbs-down glyp-dislike" title="Não Gostei" aria-hidden="true"></span>
+                    </div>
                 </div>
-                <div class="comment-comment">É verdade, eu sofri com esse buraco recentemente e é muito importante a solução dele para evitar outros problemas maiores</div>
-                <div class="comment-footer">
-                    <span class="glyphicon glyphicon-thumbs-up glyp-like" title="Gostei" aria-hidden="true"></span>
-                    <span>122</span>
-                    <span class="glyphicon glyphicon-thumbs-down glyp-dislike" title="Não Gostei" aria-hidden="true"></span>
-                </div>
-            </div>
-
-            <div class="comment">
-                <div class="comment-user">Alan Sol</div>
-                <div class="comment-comment">Sim sim, concordo plenamente.</div>
-                <div class="comment-footer">
-                    <span class="glyphicon glyphicon-thumbs-up glyp-like" title="Gostei" aria-hidden="true"></span>
-                    <span>32</span>
-                    <span class="glyphicon glyphicon-thumbs-down glyp-dislike" title="Não Gostei" aria-hidden="true"></span>
-                </div>
-            </div>
-
-            <div class="comment ">
-                <div class="comment-user"> 
-                    CAERN
-                    <span class="glyphicon glyphicon-star glyp-oficial" title="Instituição" aria-hidden="true"></span>
-                </div>
-                <div class="comment-comment">Problema Resolvido.</div>
-                <div class="comment-footer">
-                    <span class="glyphicon glyphicon-thumbs-up glyp-like" title="Gostei" aria-hidden="true"></span>
-                    <span>442</span>
-                    <span class="glyphicon glyphicon-thumbs-down glyp-dislike" title="Não Gostei" aria-hidden="true"></span>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @stop

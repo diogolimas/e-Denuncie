@@ -7,6 +7,8 @@ use App\Models\Report_comment;
 use App\Models\Like_comment;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Http\Controllers\Auth;
+use App\User;
 
 class CommentController extends Controller
 {
@@ -27,15 +29,17 @@ class CommentController extends Controller
      */
     public function create(Request $request)
     {
-        if (auth()->user()->table == 'users') $tipo = 'user_id';
-        else $tipo = 'instituicao_id';
+        //if (Auth::getTable() == 'users') $tipo = 'instituicao_id';
+        //else $tipo = 'user_id';
         $comentar = Comment::create([
             'descricao' => $request->descricao,
             'post_id' => $request->post_id,
-            $tipo => auth()->user()->id,
+            'user_id' => auth()->user()->id,
+
         ]);
         $nameFile = '';
         $originalName = '';
+        $insertarimagem = null;
         if(isset($request->imagem)){
             $originalName = $request->imagem->getClientOriginalName();
             $name = time();
@@ -54,10 +58,10 @@ class CommentController extends Controller
         if($comentar) {
             if ($insertarimagem)
                 $request->imagem->storeAs('posts', $nameFile);
-            return redirect()->route('home', ['success' => 'Comentário publicado com sucesso']);
+            return redirect()->back()->with(['success' => 'Comentário publicado com sucesso']);
         }
         else
-            return redirect()->route('home',['error' => 'Erro ao comentar']);
+            return redirect()->back()->with(['error' => 'Erro ao comentar']);
 
     }
 
@@ -105,7 +109,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
