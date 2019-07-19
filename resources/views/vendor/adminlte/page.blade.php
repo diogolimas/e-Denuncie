@@ -134,6 +134,39 @@
 
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            }
+        });
+        function getMessage(){
+        $.post("{{route('teste')}}", function(data){
+            $("#msg").html(data.msg);
+        });
+        }
+    function getMessagea() {
+            alert('a')
+            $.ajax({
+                type:'POST',
+                url:'/getmsg',
+                data:'_token = <?php echo csrf_token() ?>',
+                success:function(data) {
+                    $("#msg").html(data.msg);
+                }
+            });
+        }
+    $(function() {
+        $('#msg').click(function(){
+            getMessage();
+        });
+
+        
+    });
+
+    
+    
+</script>
     @stack('js')
     @yield('js')
 @stop

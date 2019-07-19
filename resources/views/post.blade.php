@@ -4,9 +4,15 @@
 
 @section('content_header')
     <!-- <h1>Dashboard</h1> -->
+    <button class="testee" onclick="getMessage();"></button>
 @stop
 
 @section('content')
+
+
+    <div id='msg'>This message will be replaced using Ajax. 
+         Click the button to replace the message.</div>
+
     <div class="posts-container">
         <div class="posts post-comments">
             <div class="post">
@@ -112,5 +118,4 @@
             </div>
         </div>
     </div>
-
 @stop
