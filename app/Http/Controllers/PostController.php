@@ -37,8 +37,9 @@ class PostController extends Controller
             $name = time();
             $extension = $request->imagem->extension();
             $nameFile = "{$name}.{$extension}";
-            $this->validate($request, $post->rules);
         }
+
+        $this->validate($request, $post->rules);
 
         $insertarpost = Post::create([
             'descricao' => $request->descricao,
