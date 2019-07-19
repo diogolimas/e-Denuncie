@@ -36,15 +36,7 @@
                     </div>
                     
                 </form>
-                <form action="{{route('comentar.denuncia')}}" method="post" enctype="multipart/form-data">
-                    {!!csrf_field()!!}
-                    <input type="text" name="descricao" id="" placeholder="digita aqui kkkkk">
-                    <input type="hidden" name="post_id" value={{$this->id}}>
-                    <div class="send-form-sends">
-                        <button type="submit" class="btn btn-success">Postar</button>
-                    </div>
-
-                </form>
+                
             </div>
 
             @if(isset($posts))
