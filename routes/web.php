@@ -16,8 +16,12 @@
 Auth::routes();
 
 Route::group(['middleware' => ['auth']],function(){
-    Route::post('/postar','PostController@create')->name('postar.denuncia');
     Route::get('/', 'HomeController@index')->name('home');
+
+    Route::post('/postar','PostController@create')->name('postar.denuncia');
+
+    Route::post('/comentar','CommentController@create')->name('comentar.denuncia');
+
     Route::get('/post/{id}/comments', 'PostController@show')->name('post.comment');
 });
 

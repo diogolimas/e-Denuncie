@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imagem_comment;
+use App\Models\Report_comment;
+use App\Models\Like_comment;
 use Illuminate\Http\Request;
-use App\User;
-use App\Models\Post;
-use App\Models\Up_post;
-use App\Models\Imagem_post;
-use App\Models\Categoria;
-use Intervention\Image\Facades\Image as Image;
-use Illuminate\Support\Facades\Response;
+use App\Models\Comment;
 
-class PostController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,60 +25,40 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, Post $post)
+    public function create(Request $request)
     {
+        if (auth()->user()->table == 'users') $tipo = 'user_id';
+        else $tipo = 'instituicao_id';
+        $comentar = Comment::create([
+            'descricao' => $request->descricao,
+            'post_id' => $request->post_id,
+            $tipo => auth()->user()->id,
+        ]);
         $nameFile = '';
         $originalName = '';
-        if(isset($request->imagem)) {
+        if(isset($request->imagem)){
             $originalName = $request->imagem->getClientOriginalName();
             $name = time();
             $extension = $request->imagem->extension();
             $nameFile = "{$name}.{$extension}";
-            $this->validate($request, $post->rules);
         }
-
-        $insertarpost = Post::create([
-            'descricao' => $request->descricao,
-            'user_id'   => auth()->user()->id,
-        ]);
-
         if(isset($request->imagem)){
-            $insertarimagem = Imagem_post::create([
+            $insertarimagem = Imagem_comment::create([
                 'nome'  =>     $originalName,
                 'descricao' => $request->descricaoImagem,
                 'arquivo'  =>  $nameFile,
-                'post_id'  =>  $insertarpost->id,
+                'comment_id'  =>  $comentar->id,
             ]);
         }
 
-        if($insertarpost){
-            if(isset($insertarimagem)){
+        if($comentar) {
+            if ($insertarimagem)
                 $request->imagem->storeAs('posts', $nameFile);
-
-                return redirect()->route('home',['success' => 'Post publicado com sucesso']);
-            }else{
-                return redirect()->route('home',['success' => 'Post publicado com sucesso']);
-            }
+            return redirect()->route('home', ['success' => 'Comentário publicado com sucesso']);
         }
-    }
-    public function upPost(Request $request, $id){
-        if (auth()->user()->table == 'users') $tipo = 'user_id';
-        else $tipo = 'instituicao_id';
-        Up_post::create([
-            $tipo => auth()->user()->id,
-            'post_id' => $id,
-            'ups' => $request->ups,
-        ]);
+        else
+            return redirect()->route('home',['error' => 'Erro ao comentar']);
 
-
-    }
-    public function createCategoria(Request $request){
-        Categoria::create([
-           'nome' => $request->descricao,
-        ]);
-    }
-    public function upCount($id){
-        $ups = Up_post::where('post_id',$id)->sum('ups');
     }
 
     /**
@@ -90,6 +67,32 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function newReport_comment(Request $request)
+    {
+        if (auth()->user()->table == 'users') $tipo = 'user_id';
+        else $tipo = 'instituicao_id';
+        $reportar = Report_comment::create([
+            'descricao' => $request->descricao,
+            'comment_id' => $request->comment_id,
+            $tipo => auth()->user()->id,
+        ]);
+
+        if($reportar)
+            return redirect()->route('home',['success' => 'Post reportado com sucessso']);
+        else
+            return redirect()->route('home',['eroor' => 'Erro ao reportar o post']);
+
+    }
+
+    public function likeComment(Request $request, $id){
+        if (auth()->user->table == 'users') $tipo = 'user_id';
+        else $tipo = 'instituicao_id';
+        Like_comment::create([
+            $tipo => auth()->user()->id,
+            'comment_id' => $id,
+        ]);
+    }
+
     public function store(Request $request)
     {
         //
@@ -98,13 +101,11 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  te\Http\Response
      */
     public function show($id)
     {
-        $nome = 'asd';
-        return view('post', compact('id','nome'));
+        //
     }
 
     /**
@@ -127,7 +128,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -138,7 +139,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        Comment::destroy($id);
 
+    }
 }

@@ -13,4 +13,8 @@ class Post extends Model
     protected $fillable = [
         'descricao', 'user_id','imagem'
     ];
+
+    public $rules = [
+        'descricao' => 'required|max:1000',
+    ];
 }

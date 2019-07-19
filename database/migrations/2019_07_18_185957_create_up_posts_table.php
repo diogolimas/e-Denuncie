@@ -21,7 +21,6 @@ class CreateUpPostsTable extends Migration
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->unsignedBigInteger('instituicao_id')->nullable();
             $table->foreign('instituicao_id')->references('id')->on('instituicaos')->onDelete('cascade');
-            $table->integer('ups');
             $table->timestamps();
         });
     }
