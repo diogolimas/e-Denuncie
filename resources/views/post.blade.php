@@ -51,20 +51,8 @@
 
         <div class="post-comment">
             <div class="send-form post-comments-c">
-<<<<<<< HEAD
-                <form action="{{route('comentar.denuncia')}}" method="post">
-=======
-                <!-- <form action="{{route('comentar.denuncia')}}" method="post" enctype="multipart/form-data">
-                    {!!csrf_field()!!}
-                    <input type="text" name="descricao" id="" placeholder="digita aqui kkkkk">
-                    <input type="hidden" name="post_id" value="">
-                    <div class="send-form-sends">
-                        <button type="submit" class="btn btn-success">Postar</button>
-                    </div>
 
-                </form> -->
-                <form action="" method="post">
->>>>>>> 4f2fe353fa56a05ee5138309f59414d7d3bc96f0
+                <form action="{{route('comentar.denuncia')}}" method="post">
                     {!!csrf_field()!!}
                     <input type="hidden" name="post_id" value="{{$id}}">
                     <textarea name="descricao" class="send-form-text" rows="2" placeholder="Digite um comentário"></textarea>
