@@ -39,7 +39,6 @@
                     </div>
                     
                 </form>
-<<<<<<< HEAD
                 <form action="{{route('comentar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <input type="text" name="descricao" id="" placeholder="digita aqui kkkkk">
@@ -49,9 +48,6 @@
                     </div>
 
                 </form>
-=======
-                
->>>>>>> 4f2fe353fa56a05ee5138309f59414d7d3bc96f0
             </div>
 
             @if(isset($posts))
@@ -76,15 +72,9 @@
                     @foreach ($imagensPost as $imagem)
                     
                         @if($imagem->post_id == $postItem->id)
-<<<<<<< HEAD
                         
                             <div class="post-photo">
                                 <img src="{{ url("/storage/posts/{$imagem->arquivo}") }}" alt="{{$postItem->descricao}}">
-=======
-                            <a href="{{route('post.comment', ['id'=>$postItem->id])}}">
-                            <div class="post-photo" >
-                                <img src="{{ url("/storage/{$imagem->arquivo}") }}" alt="{{$postItem->descricao}}">
->>>>>>> 4f2fe353fa56a05ee5138309f59414d7d3bc96f0
                             </div>
                             </a>
                              
