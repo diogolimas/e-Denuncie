@@ -24,7 +24,6 @@
                         <span class="btn btn-primary btn-file">
                             <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
                             <input type="file" name="imagem" accept="image/*">
-                            
                         </span>
                         <button type="submit" class="btn btn-success">Postar</button>
                     </div>

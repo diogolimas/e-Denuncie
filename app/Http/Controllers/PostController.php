@@ -84,7 +84,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $nome = 'asd';
+        return view('post', compact('id','nome'));
     }
 
     /**
