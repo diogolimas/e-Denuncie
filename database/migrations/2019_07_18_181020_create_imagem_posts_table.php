@@ -16,8 +16,10 @@ class CreateImagemPostsTable extends Migration
         Schema::create('imagem_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
+            //nome é o original
             $table->string('descricao');
             $table->string('arquivo');
+            //nome do nome do arquivo no banco 
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();

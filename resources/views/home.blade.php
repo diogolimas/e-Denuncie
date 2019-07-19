@@ -16,7 +16,7 @@
         
         <div class="posts-container">
             <div class="send-form">
-                <form action="{{route('postar.denuncia')}}" method="post">
+                <form action="{{route('postar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
 
@@ -24,6 +24,7 @@
                         <span class="btn btn-primary btn-file">
                             <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
                             <input type="file" name="imagem" accept="image/*">
+                            <input type="text" name="descricaoImagem" id="">
                         </span>
                         <button type="submit" class="btn btn-success">Postar</button>
                     </div>
