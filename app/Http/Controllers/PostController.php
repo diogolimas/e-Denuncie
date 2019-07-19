@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Post;
@@ -55,8 +56,8 @@ class PostController extends Controller
         }
 
         if($insertarpost){
-            if(isset($insertarimagem)){
-                $request->imagem->storeAs('posts', $nameFile);
+            if(isset($request->imagem)){
+                $add = $request->imagem->storeAs('posts', $nameFile);
 
                 return redirect()->route('home',['success' => 'Post publicado com sucesso']);
             }else{
@@ -104,7 +105,13 @@ class PostController extends Controller
     public function show($id)
     {
         $nome = 'asd';
-        return view('post', compact('id','nome'));
+        $comments = Comment::all();
+        foreach ($comments as $comment){
+            if ($comment->user_id != '') $user = User::find($comment->user_id);
+            else $user = User::find($comment->instituicao_id);
+            $users[$user->id] = $user->name;
+        }
+        return view('post', compact('id','nome', 'comments', 'users'));
     }
 
     /**
