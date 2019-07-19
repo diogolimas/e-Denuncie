@@ -32,7 +32,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, Post $post)
+    public function create(Request $request, Post $post, Imagem_post $validacao_imagem)
     {
         $nameFile = '';
         $originalName = '';
@@ -41,6 +41,7 @@ class PostController extends Controller
             $name = time();
             $extension = $request->imagem->extension();
             $nameFile = "{$name}.{$extension}";
+            $this->validate($request, $validacao_imagem->rules);
         }
 
         $this->validate($request, $post->rules);
@@ -53,7 +54,7 @@ class PostController extends Controller
         if(isset($request->imagem)){
             $insertarimagem = Imagem_post::create([
                 'nome'  =>     $originalName,
-                'descricao' => $request->descricaoImagem,
+                'descricao_imagem' => $request->descricao_imagem,
                 'arquivo'  =>  $nameFile,
                 'post_id'  =>  $insertarpost->id,
             ]);

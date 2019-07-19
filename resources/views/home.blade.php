@@ -28,7 +28,7 @@
                     <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
                     <div class="form-group">
                         <label class="label-desc">Descrição da imagem:</label>
-                        <input type="text" class="form-control" name="descricaoImagem" id="">
+                        <input type="text" class="form-control" name="descricao_imagem" id="">
                     </div>
                     <div class="send-form-sends">
                         <span class="btn btn-primary btn-file">

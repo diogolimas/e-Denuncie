@@ -17,7 +17,7 @@ class CreateImagemPostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('nome');
             //nome é o original
-            $table->string('descricao');
+            $table->string('descricao_imagem', 1000);
             $table->string('arquivo');
             //nome do nome do arquivo no banco 
             $table->unsignedBigInteger('post_id');
