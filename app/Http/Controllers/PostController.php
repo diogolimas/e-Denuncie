@@ -54,8 +54,14 @@ class PostController extends Controller
         
         $success = "Post criado com sucesso";
         if($insertarpost){
-            $add = $request->imagem->storeAs('posts', $nameFile);
-            return redirect()->route('home',['success' => 'Post publicado com sucesso']);
+            if(isset($request->imagem)){
+                $add = $request->imagem->storeAs('', $nameFile);
+                
+                return redirect()->route('home',['success' => 'Post publicado com sucesso']);
+            }else{
+                return redirect()->route('home',['success' => 'Post publicado com sucesso']);
+            }
+            
         }
     }
 
