@@ -118,7 +118,7 @@ class PostController extends Controller
         $success = $request->success;
         $nome = 'asd';
         $comments = Comment::all();
-
+        $users = null;
         foreach ($comments as $comment){
             if ($comment->user_id != '') $user = User::find($comment->user_id);
             else $user = User::find($comment->instituicao_id);
