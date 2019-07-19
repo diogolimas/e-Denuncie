@@ -68,7 +68,6 @@
                                 <img src="{{ url("/storage/posts/{$imagem->arquivo}") }}" alt="{{$postItem->descricao}}">
 
                             </div>
-                            </a>
                              
                         @endif
                         @endforeach

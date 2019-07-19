@@ -59,7 +59,7 @@ class CommentController extends Controller
 
         if($comentar) {
             if ($insertarimagem)
-                $request->imagem->storeAs('posts', $nameFile);
+                $request->imagem->storeAs('comments', $nameFile);
             return redirect()->back()->with(['success' => 'Comentário publicado com sucesso']);
         }
         else
