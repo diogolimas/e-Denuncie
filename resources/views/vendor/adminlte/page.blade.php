@@ -141,6 +141,7 @@
             }
         });
 
+        // UPS POSTS
         function getUps(id = null){
             return $.post("{{route('api.getups')}}", {id}, function(data){
                 let span = 'span#ups_post_'+id;
@@ -151,7 +152,7 @@
 
         async function setUps(id = null, ups = 0){
             await $.post("{{route('api.setups')}}", {id,ups});
-            let up = await getUps(id);
+            await getUps(id);
         }
 
         function reloadUps(){
@@ -166,8 +167,35 @@
             }
         }
 
+        // LIKES COMMENTS
+        function getLikes(id = null){
+            return $.post("{{route('api.getlikes')}}", {id}, function(data){
+                let span = 'span#likes_comment_'+id;
+                $(span).text(data);
+                return data;
+            });
+        }
+
+        async function setLikes(id = null, like = false){
+            await $.post("{{route('api.setlikes')}}", {id,like});
+            await getLikes(id);
+        }
+
+        function reloadLikes(){
+            if ($('span[id]').length){
+                Object.keys($('span[id]')).map(teste=>{
+                    if($('span[id]')[teste].attributes && $('span[id]')[teste].attributes.id){
+                        let span = $('span[id]')[teste].attributes.id.value;
+                        let comment_id = span.substr('likes_comment_'.length);
+                        getLikes(comment_id);
+                    }
+                })
+            }
+        }
+
     $(function() {
         reloadUps();
+        reloadLikes();
 
         $('.fileBtn').on('click', function() {
             $('.fileInput').trigger('click');
@@ -195,7 +223,6 @@
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,3);
         });
         
@@ -203,7 +230,6 @@
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,2);
         });
 
@@ -211,8 +237,21 @@
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,1);
+        });
+
+        $('button#bLike').click(function(e){
+            e.preventDefault();
+            
+            let idcomment = $(this).data('id_comment');
+            setLikes(idcomment,1);
+        });
+
+        $('button#bDislike').click(function(e){
+            e.preventDefault();
+            
+            let idcomment = $(this).data('id_comment');
+            setLikes(idcomment,0);
         });
         
     });

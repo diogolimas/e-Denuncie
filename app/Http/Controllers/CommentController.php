@@ -90,11 +90,50 @@ class CommentController extends Controller
 
     }
 
-    public function likeComment(Request $request, $id){
-        $sucesso = Like_comment::create([
-            'user_id' => auth()->user()->id,
-            'comment_id' => $id,
-        ]);
+    public function inverseTrue($bool){
+        switch($bool){
+            case 0:
+                return 1;
+            case 1:
+                return 0;
+            default:
+                return 0;
+        }
+    }
+
+    public function likeComment(){
+        $comment_id = $_POST['id'];
+        $like = $_POST['like'];
+        $user_id = auth()->user()->id;
+        if(!Like_comment::where('user_id',$user_id)->where('comment_id',$comment_id)->count()){
+            Like_comment::create([
+                'user_id' => $user_id,
+                'comment_id' => $comment_id,
+                'like' => $like,
+                'dislike' => $this->inverseTrue($like)
+            ]);
+        } else {
+            $id = Like_comment::where('user_id',$user_id)->where('comment_id',$comment_id)->get()[0];
+            $objeto = Like_comment::find($id->id);
+            if($like == 1){
+                $objeto->like = $this->inverseTrue($objeto->like);
+                $objeto->dislike = false;
+            }
+            else{
+                $objeto->like = false;
+                $objeto->dislike = $this->inverseTrue($objeto->dislike);
+            }
+            $objeto->save();
+        }
+
+    }
+
+    public function likeCount(){
+        $id = $_POST['id'];
+        $likes = Like_comment::where('comment_id',$id)->where('like',true)->count();
+        $dislike = Like_comment::where('comment_id',$id)->where('dislike',true)->count();
+        $total = $likes - $dislike;
+        return $total;
 
     }
 

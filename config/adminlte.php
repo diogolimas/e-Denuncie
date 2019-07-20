@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>DenunciAqui</b>',
+    'logo' => "<img src='{{asset('/img/logo_f_black.png')}}'>",
 
     'logo_mini' => '<b>D</b>!',
 

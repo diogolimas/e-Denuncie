@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'D! - Categoria')
+@section('title', 'D! - Página inicial')
 
 @section('content_header')
     <!-- <h1>Dashboard</h1> -->
@@ -23,7 +23,9 @@
                     {!!csrf_field()!!}
                     <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
                     <div class="categories">
-                        <select class="categories-select" name="categoria">
+                        <select class="categories-select" name= "categoria">
+                            <option value="" selected disabled>Selecione a categoria</option>
+                            <option disabled>────────────</option>
                             <option value="1">Mobilidade urbana</option>
                             <option value="2">Serviço de saúde</option>
                             <option value="3">Acessibilidade virtual</option>
