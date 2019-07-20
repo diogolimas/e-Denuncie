@@ -14,16 +14,16 @@
 <br>
 [Luciano Sizilio](http://github.com/lusizilio)
 <br>
-   
+
 # Como usar e instalar o projeto e-Denuncie
+
+## Nas distribuição Linux e Windows:
    
-## No Windows:
-- Pré-requisitos:
+ - Pré-requisitos:
   - PHP>=7.1;
   - Banco de dados com MySQL;
-  - Composer;
-
-### Passos:
+  - Composer;   
+  ***Para windows é nessário baixar o git bash; para linux, o git;
 - Clone o projeto por desse repositório:
 - Abra seu terminal dentro do repositório já clonado;
 - Execute o seguinte comando no terminal:
@@ -52,4 +52,7 @@ composer install
 ```
 - Acesse a url no navegador por "localhost:8000" ou "127.0.0.1:8000";
       
-##
+          
+##  Na distribuição Linux
+   
+- Crie um banco de dados
