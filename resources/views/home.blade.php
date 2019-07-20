@@ -63,7 +63,6 @@
             @if(isset($posts))
 
             @foreach ($posts as $postItem)
-
             <div class="posts">
                 <div class="post">
                     <div class="post-header">
@@ -78,7 +77,7 @@
                         </p>
                         <div class="post-header-ups">
                             <span>
-                                <span id="ups_post{{$postItem->id}}" >0</span>
+                                <span id="ups_post_{{$postItem->id}}" >0</span>
                                 <span class="glyphicon glyphicon-chevron-up post-header-ups-up" aria-hidden="true"></span>
                                 <span class="glyphicon glyphicon-option-vertical post-header-option" aria-hidden="true"></span>
                             </span>

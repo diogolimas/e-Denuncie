@@ -16,10 +16,8 @@ class CreateReportCommentsTable extends Migration
         Schema::create('report_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descricao');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('instituicao_id')->nullable();
-            $table->foreign('instituicao_id')->references('id')->on('instituicaos')->onDelete('cascade');
             $table->unsignedBigInteger('comment_id');
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
             $table->timestamps();

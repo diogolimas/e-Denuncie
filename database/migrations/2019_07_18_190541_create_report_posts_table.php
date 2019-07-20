@@ -18,10 +18,8 @@ class CreateReportPostsTable extends Migration
             $table->string('descricao');
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('instituicao_id')->nullable();
-            $table->foreign('instituicao_id')->references('id')->on('instituicaos')->onDelete('cascade');
             $table->timestamps();
         });
     }

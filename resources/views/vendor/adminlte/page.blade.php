@@ -142,25 +142,32 @@
         });
 
         function getUps(id = null){
-            $.post("{{route('api.getups')}}", {id}, function(data){
-                alert(data);
+            return $.post("{{route('api.getups')}}", {id}, function(data){
+                let span = 'span#ups_post_'+id;
+                $(span).text(data);
                 return data;
-                /*
-                alert(data)
-                console.log(data)
-                $("#msg").html(data.msg);*/
             });
         }
 
-        function setUps(id = null, ups){
-            $.post("{{route('api.setups')}}", {id,ups}, function(data){
-                alert(data);
-                // let span = 'span#ups_post'+id; 
-                // $(span).text(parseInt(getUps());
-            });
+        async function setUps(id = null, ups = 0){
+            await $.post("{{route('api.setups')}}", {id,ups});
+            let up = await getUps(id);
+        }
+
+        function reloadUps(){
+            if ($('span[id]').length){
+                Object.keys($('span[id]')).map(teste=>{
+                    if($('span[id]')[teste].attributes && $('span[id]')[teste].attributes.id){
+                        let span = $('span[id]')[teste].attributes.id.value;
+                        let post_id = span.substr('ups_post_'.length);
+                        getUps(post_id);
+                    }
+                })
+            }
         }
 
     $(function() {
+        reloadUps();
 
         $('.fileBtn').on('click', function() {
             $('.fileInput').trigger('click');
@@ -184,33 +191,28 @@
             $('.img-desc').addClass('none');
         });
 
-        $('#msg').click(function(){
-            getUps(1);
-        });
-
         $('button#lUP').click(function(e){
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post'+idpost; 
+            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,3);
-            // $(span).text(parseInt($(span).text())+3);
         });
-
+        
         $('button#mUP').click(function(e){
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post'+idpost; 
-            $(span).text(parseInt($(span).text())+2);
+            let span = 'span#ups_post_'+idpost; 
+            setUps(idpost,2);
         });
 
         $('button#sUP').click(function(e){
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post'+idpost; 
-            $(span).text(parseInt($(span).text())+1);
+            let span = 'span#ups_post_'+idpost; 
+            setUps(idpost,1);
         });
         
     });
