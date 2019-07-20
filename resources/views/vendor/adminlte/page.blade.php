@@ -43,9 +43,13 @@
             <!-- Logo -->
             <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">{!! config('adminlte.logo_mini', '<b>A</b>LT') !!}</span>
+                <span class="logo-mini">
+                    <img src="{{asset('/img/logo_c_white.png')}}" width="30px" alt="" >
+                </span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</span>
+                <span class="logo-lg">
+                <img src="{{asset('/img/logo_f_white.png')}}" width="50px" alt="">
+                </span>
             </a>
 
             <!-- Header Navbar -->
@@ -140,27 +144,159 @@
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             }
         });
-        function getMessage(){
-        $.post("{{route('teste')}}", function(data){
-            $("#msg").html(data.msg);
-        });
-        }
-    function getMessagea() {
-            alert('a')
-            $.ajax({
-                type:'POST',
-                url:'/getmsg',
-                data:'_token = <?php echo csrf_token() ?>',
-                success:function(data) {
-                    $("#msg").html(data.msg);
+
+        // UPS POSTS
+        function getUps(id = null){
+            return $.post("{{route('api.getups')}}", {id}, function(data){
+                let span = 'span#ups_post_'+id;
+                switch(data.statusUp){
+                    case 0:
+                        $(`button#sUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#mUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#lUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        break;
+                    case 1:
+                        $(`button#sUP[data-id_post="${id}"]`).addClass('glyp-selected');
+                        $(`button#mUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#lUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        break;
+                    case 2:
+                        $(`button#sUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#mUP[data-id_post="${id}"]`).addClass('glyp-selected');
+                        $(`button#lUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        break;
+                    case 3:
+                        $(`button#sUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#mUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#lUP[data-id_post="${id}"]`).addClass('glyp-selected');
+                        break;
+                    default:
+                        break;
                 }
+                $(span).text(data.ups);
+                return data.ups;
             });
         }
+
+        async function setUps(id = null, ups = 0){
+            await $.post("{{route('api.setups')}}", {id,ups});
+            await getUps(id);
+        }
+
+        function reloadUps(){
+            if ($('span[id]').length){
+                Object.keys($('span[id]')).map(teste=>{
+                    if($('span[id]')[teste].attributes && $('span[id]')[teste].attributes.id){
+                        let span = $('span[id]')[teste].attributes.id.value;
+                        let post_id = span.substr('ups_post_'.length);
+                        getUps(post_id);
+                    }
+                })
+            }
+        }
+
+        // LIKES COMMENTS
+        function getLikes(id = null){
+            return $.post("{{route('api.getlikes')}}", {id}, function(data){
+                let span = 'span#likes_comment_'+id;
+                switch(data.statusLike){
+                    case 0:
+                        $(`button#bLike[data-id_comment="${id}"]`).removeClass('liked');
+                        $(`button#bDislike[data-id_comment="${id}"]`).addClass('disliked');
+                        break;
+                    case 1:
+                        $(`button#bLike[data-id_comment="${id}"]`).addClass('liked');
+                        $(`button#bDislike[data-id_comment="${id}"]`).removeClass('disliked');
+                        break;
+                    case 2:
+                        $(`button#bLike[data-id_comment="${id}"]`).removeClass('liked');
+                        $(`button#bDislike[data-id_comment="${id}"]`).removeClass('disliked');
+                        break;
+                    default:
+                        break;
+                }
+                $(span).text(data.total);
+                return data.total;
+            });
+        }
+
+        async function setLikes(id = null, like = false){
+            await $.post("{{route('api.setlikes')}}", {id,like});
+            await getLikes(id);
+        }
+
+        function reloadLikes(){
+            if ($('span[id]').length){
+                Object.keys($('span[id]')).map(teste=>{
+                    if($('span[id]')[teste].attributes && $('span[id]')[teste].attributes.id){
+                        let span = $('span[id]')[teste].attributes.id.value;
+                        let comment_id = span.substr('likes_comment_'.length);
+                        getLikes(comment_id);
+                    }
+                })
+            }
+        }
+
     $(function() {
-        $('#msg').click(function(){
-            getMessage();
+        reloadUps();
+        reloadLikes();
+
+        $('.fileBtn').on('click', function() {
+            $('.fileInput').trigger('click');
+        });
+        
+        $('.fileInput').on('change', function() {
+            fileName = $(this)[0].files[0].name;
+            $('.fileRemoveBtn').removeClass('none');
+            $('.inputFileText').removeClass('none');
+            $('.fileBtn').addClass('nobrright');
+            $('.inputFileText').html(fileName);
+            $('.img-desc').removeClass('none');
         });
 
+        $('.fileRemoveBtn').on('click', function() {
+            $('.fileInput').val('');
+            $('.fileRemoveBtn').addClass('none');
+            $('.inputFileText').addClass('none');
+            $('.fileBtn').removeClass('nobrright');
+            $('.inputFileText').html(fileName);
+            $('.img-desc').addClass('none');
+        });
+
+        $('button#lUP').click(function(e){
+            e.preventDefault();
+            
+            let idpost = $(this).data('id_post');
+            setUps(idpost,3);
+        });
+        
+        $('button#mUP').click(function(e){
+            e.preventDefault();
+            
+            let idpost = $(this).data('id_post');
+            setUps(idpost,2);
+        });
+
+        $('button#sUP').click(function(e){
+            e.preventDefault();
+            
+            let idpost = $(this).data('id_post');
+            setUps(idpost,1);
+        });
+
+        $('button#bLike').click(function(e){
+            e.preventDefault();
+            
+            let idcomment = $(this).data('id_comment');
+            setLikes(idcomment,1);
+        });
+
+        $('button#bDislike').click(function(e){
+            e.preventDefault();
+            
+            let idcomment = $(this).data('id_comment');
+            setLikes(idcomment,0);
+        });
         
     });
 

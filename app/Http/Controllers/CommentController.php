@@ -59,7 +59,7 @@ class CommentController extends Controller
 
         if($comentar) {
             if ($insertarimagem)
-                $request->imagem->storeAs('posts', $nameFile);
+                $request->imagem->storeAs('comments', $nameFile);
             return redirect()->back()->with(['success' => 'Comentário publicado com sucesso']);
         }
         else
@@ -90,13 +90,62 @@ class CommentController extends Controller
 
     }
 
-    public function likeComment(Request $request, $id){
-        if (auth()->user->table == 'users') $tipo = 'user_id';
-        else $tipo = 'instituicao_id';
-        Like_comment::create([
-            $tipo => auth()->user()->id,
-            'comment_id' => $id,
-        ]);
+    public function inverseTrue($bool){
+        switch($bool){
+            case 0:
+                return 1;
+            case 1:
+                return 0;
+            default:
+                return 0;
+        }
+    }
+
+    public function likeComment(){
+        $comment_id = $_POST['id'];
+        $like = $_POST['like'];
+        $user_id = auth()->user()->id;
+        if(!Like_comment::where('user_id',$user_id)->where('comment_id',$comment_id)->count()){
+            Like_comment::create([
+                'user_id' => $user_id,
+                'comment_id' => $comment_id,
+                'like' => $like,
+                'dislike' => $this->inverseTrue($like)
+            ]);
+        } else {
+            $id = Like_comment::where('user_id',$user_id)->where('comment_id',$comment_id)->get()[0];
+            $objeto = Like_comment::find($id->id);
+            if($like == 1){
+                $objeto->like = $this->inverseTrue($objeto->like);
+                $objeto->dislike = false;
+            }
+            else{
+                $objeto->like = false;
+                $objeto->dislike = $this->inverseTrue($objeto->dislike);
+            }
+            $objeto->save();
+        }
+
+    }
+
+    public function likeCount(){
+        $id = $_POST['id'];
+        $user_id = auth()->user()->id;
+        $likes = Like_comment::where('comment_id',$id)->where('like',true)->count();
+        $dislike = Like_comment::where('comment_id',$id)->where('dislike',true)->count();
+        $total = $likes - $dislike;
+        $statusLike = 2;
+        if(Like_comment::where('comment_id',$id)->where('user_id',auth()->user()->id)->count()){
+            $comment = Like_comment::where('user_id',$user_id)->where('comment_id',$id)->get()[0];
+            if($comment->like == 1){
+                $statusLike = 1;
+            } elseif($comment->dislike == 1){
+                $statusLike = 0;
+            }
+        }
+
+        return ['total'=>$total, 'statusLike'=>$statusLike];
+
     }
 
     public function store(Request $request)

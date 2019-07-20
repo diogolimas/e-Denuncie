@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria_post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\User;
+use DB;
 use App\Models\Post;
 use App\Models\Up_post;
 use App\Models\Imagem_post;
@@ -34,60 +36,79 @@ class PostController extends Controller
      */
     public function create(Request $request, Post $post, Imagem_post $validacao_imagem)
     {
-        $nameFile = '';
-        $originalName = '';
-        if(isset($request->imagem)) {
-            $originalName = $request->imagem->getClientOriginalName();
-            $name = time();
-            $extension = $request->imagem->extension();
-            $nameFile = "{$name}.{$extension}";
-            $this->validate($request, $validacao_imagem->rules);
-        }
+         $nameFile = '';
+         $originalName = '';
+         if(isset($request->imagem)) {
+             $originalName = $request->imagem->getClientOriginalName();
+             $name = time();
+             $extension = $request->imagem->extension();
+             $nameFile = "{$name}.{$extension}";
+             $this->validate($request, $validacao_imagem->rules);
+         }
 
-        $this->validate($request, $post->rules);
+         $this->validate($request, $post->rules);
 
-        $insertarpost = Post::create([
-            'descricao' => $request->descricao,
-            'user_id'   => auth()->user()->id,
-        ]);
+         $insertarpost = Post::create([
+             'descricao' => $request->descricao,
+             'user_id'   => auth()->user()->id,
+         ]);
+         if (isset($request->categoria)) $categoria = $request->categoria;
+         else $categoria = 6;
+         $insertarCategoria = Categoria_post::insert([
+            'post_id'       => $insertarpost->id,
+            'categoria_id'  => $categoria
+         ]);
 
-        if(isset($request->imagem)){
-            $insertarimagem = Imagem_post::create([
-                'nome'  =>     $originalName,
-                'descricao_imagem' => $request->descricao_imagem,
-                'arquivo'  =>  $nameFile,
-                'post_id'  =>  $insertarpost->id,
+         if(isset($request->imagem)){
+             $insertarimagem = Imagem_post::create([
+                 'nome'  =>     $originalName,
+                 'descricao_imagem' => $request->descricao_imagem,
+                 'arquivo'  =>  $nameFile,
+                 'post_id'  =>  $insertarpost->id,
+             ]);
+         }
+
+         if($insertarpost){
+             if(isset($request->imagem)){
+                 $add = $request->imagem->storeAs('posts', $nameFile);
+
+                 return redirect()->route('home',['success' => 'Post publicado com sucesso']);
+             }else{
+                 return redirect()->route('home',['success' => 'Post publicado com sucesso']);
+             }
+         }
+    }
+    public function upPost(){
+        $post_id = $_POST['id'];
+        $ups = $_POST['ups'];
+        $user_id = auth()->user()->id;
+        if(!Up_post::where('user_id',$user_id)->where('post_id',$post_id)->count()){
+            Up_post::create([
+                'user_id' => $user_id,
+                'post_id' => $post_id,
+                'ups' => $ups,
             ]);
-        }
-
-        if($insertarpost){
-            if(isset($request->imagem)){
-                $add = $request->imagem->storeAs('posts', $nameFile);
-
-                return redirect()->route('home',['success' => 'Post publicado com sucesso']);
-            }else{
-                return redirect()->route('home',['success' => 'Post publicado com sucesso']);
-            }
+        } else {
+            $id = Up_post::where('user_id',$user_id)->where('post_id',$post_id)->get()[0];
+            $objeto = Up_post::find($id->id);
+            if($objeto->ups == $ups)
+                $objeto->ups = 0;
+            else
+                $objeto->ups = $ups;
+            $objeto->save();
         }
     }
-    public function upPost(Request $request, $id){
-        if (auth()->user()->table == 'users') $tipo = 'user_id';
-        else $tipo = 'instituicao_id';
-        Up_post::create([
-            $tipo => auth()->user()->id,
-            'post_id' => $id,
-            'ups' => $request->ups,
-        ]);
 
-
-    }
-    public function createCategoria(Request $request){
-        Categoria::create([
-           'nome' => $request->descricao,
-        ]);
-    }
-    public function upCount($id){
+    public function upCount(){
+        $id = $_POST['id'];
+        $user_id = auth()->user()->id;
+        $statusUp = 0;
         $ups = Up_post::where('post_id',$id)->sum('ups');
+        if(Up_post::where('user_id',$user_id)->where('post_id',$id)->count()){
+            $post = Up_post::where('user_id',$user_id)->where('post_id',$id)->get()[0];
+            $statusUp = $post->ups;
+        }
+        return ['ups'=>$ups,'statusUp'=>$statusUp];
     }
 
     /**
@@ -107,16 +128,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        //Coisas do post
+        $post = Post::find($id);
+        $author_post = User::find($post->user_id);
+        $success = $request->success;
         $nome = 'asd';
-        $comments = Comment::all();
+        $comments = DB::table('comments')->where('post_id',$id)->latest()->get();
+        $users = null;
+        $imagensPost = DB::table('imagem_posts')->where('post_id',$id)->get();
+        $imagemPost = null;
+
+        //Coisas dos comentários
+        $imagensComment = DB::table('imagem_comments')->get();
         foreach ($comments as $comment){
-            if ($comment->user_id != '') $user = User::find($comment->user_id);
-            else $user = User::find($comment->instituicao_id);
+            $user = User::find($comment->user_id);
             $users[$user->id] = $user->name;
         }
-        return view('post', compact('id','nome', 'comments', 'users'));
+        return view('post', compact('id','nome', 'comments', 'users','imagensComment','success', 'post','author_post', 'imagensPost'));
     }
 
     /**

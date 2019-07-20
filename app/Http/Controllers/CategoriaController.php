@@ -2,20 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
+use App\Models\Categoria_post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Instituicao;
+use DB;
 
-class InstituicaoController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $categoria = Categoria::find($id);
+        $posts = DB::table('posts')
+            ->join('categoria_posts', 'posts.id', '=', 'categoria_posts.post_id')
+            ->select('*')
+            ->latest()
+            ->where('categoria_id', $id)
+            ->paginate(7);
+        $imagensPost = DB::table('imagem_posts')->get();
+        $usuarios = DB::table('users')->get();
+        return view('categoria', compact('categoria','posts', 'imagensPost', 'usuarios'));
     }
 
     /**
@@ -25,18 +35,11 @@ class InstituicaoController extends Controller
      */
     public function create(Request $request)
     {
-        $criar_instituicao = Instituicao::create([
-            'nome' => $request->nome,
-            'cnpj' => $request->cnpj,
-            'sigla' => $request->sigla,
-            'login' => $request->login,
-            'senha' => Hash::make($request->senha),
+        $sucesso = Categoria::create([
+           'nome' => $request->nome
         ]);
-        if ($criar_instituicao)
-            return redirect()->route('home',['success' => 'Instituição criada com sucesso!']);
-        else
-            return redirect()->route('home',['error' => 'Falha ao criar instituição']);
-
+        if ($sucesso) return redirect()->route('categorias',['success' => 'Categoria criada com sucesso!']);
+        else return redirect()->route('categorias',['error' => 'Falha ao criar categoria!']);
     }
 
     /**
@@ -69,7 +72,7 @@ class InstituicaoController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -81,17 +84,7 @@ class InstituicaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $instituicao = Instituicao::find($id);
-        $table_itens = ['nome', 'cnpj', 'sigla', 'login', 'senha'];
-        foreach ($table_itens as $item){
-            if (isset($request->item))
-                $instituicao->item = $request->item;
-        }
-        $sucesso = $instituicao->save();
-        if ($sucesso)
-            return redirect()->route('home',['sucess' => 'Os dados da instituição foram atualizados com sucesso']);
-        else
-            return redirect()->route('home',['error' => 'Não foi possível atualizar os dados da instituição']);
+        //
     }
 
     /**
@@ -102,6 +95,6 @@ class InstituicaoController extends Controller
      */
     public function destroy($id)
     {
-        Instituicao::destroy($id);
+        //
     }
 }

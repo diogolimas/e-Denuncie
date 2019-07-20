@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => '',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>DenunciAqui</b>',
+    'logo' => "<img src='{{asset('/img/logo_f_black.png')}}'>",
 
-    'logo_mini' => '<b>D</b>!',
+    'logo_mini' => '<b>e</b>!',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
 
     'logout_url' => 'logout',
 
@@ -108,81 +108,66 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'Principal',
         [
-            'text' => 'Blog',
+            'text' => '',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Página inicial',
+            'url'         => '/',
+            'icon'        => 'home',
+            
+            
         ],
-        'ACCOUNT SETTINGS',
+        'Sobre',
         [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
+            'text' => '',
+            'url'  => '',
+            'can'  => 'manage-blog',
         ],
         [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
+            'text'        => 'Minhas publicações',
+            'url'         => '/posts',
+            'icon'        => 'user',
+            
+            
+        ],
+        'tipos de publicação',
+ 
+        [
+            'text'    => 'Categorias',
+            'icon'    => 'list-alt',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Mobilidade urbana',
+                    'url'  => '/categoria/1',
                 ],
                 [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text'    => 'Serviço de saúde',
+                    'url'     => '/categoria/2',
+
                 ],
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Acessibilidade virtual',
+                    'url'  => '/categoria/3',
+                ],
+                [
+                    'text' => 'Educação',
+                    'url'  => '/categoria/4',
+                ],
+                [
+                    'text' => 'Segurança',
+                    'url'  => '/categoria/5',
+                ],
+                [
+                    'text' => 'Outros',
+                    'url'  => '/categoria/6',
                 ],
             ],
         ],
-        'LABELS',
-        [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
-        ],
+        
     ],
 
     /*
