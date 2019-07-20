@@ -29,6 +29,8 @@
                     <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
                     <div class="categories">
                         <select class="categories-select">
+                            <option value="" selected disabled>Selecione a categoria</option>
+                            <option disabled>────────────</option>
                             <option value="">Mobilidade urbana</option>
                             <option value="">Serviço de saúde</option>
                             <option value="">Acessibilidade virtual</option>
