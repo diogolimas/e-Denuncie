@@ -152,7 +152,7 @@
 
         async function setUps(id = null, ups = 0){
             await $.post("{{route('api.setups')}}", {id,ups});
-            let up = await getUps(id);
+            await getUps(id);
         }
 
         function reloadUps(){
@@ -178,7 +178,7 @@
 
         async function setLikes(id = null, like = false){
             await $.post("{{route('api.setlikes')}}", {id,like});
-            let likes = await getLikes(id);
+            await getLikes(id);
         }
 
     $(function() {
@@ -231,9 +231,6 @@
             e.preventDefault();
             
             let idcomment = $(this).data('id_comment');
-            let span = 'span#likes_comment_'+idcomment;
-            // setUps(idpost,3);
-            // console.log(span)
             setLikes(idcomment,1);
         });
 
@@ -241,9 +238,6 @@
             e.preventDefault();
             
             let idcomment = $(this).data('id_comment');
-            let span = 'span#likes_comment_'+idcomment;
-            // setUps(idpost,3);
-            // console.log(span)
             setLikes(idcomment,0);
         });
         
