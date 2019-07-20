@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Categoria_post;
 use Illuminate\Http\Request;
 use DB;
 
@@ -16,8 +17,15 @@ class CategoriaController extends Controller
     public function index($id)
     {
         $categoria = Categoria::find($id);
-        $posts = DB::table('posts')->where('id',$id)->latest()->get();
-        return view('categoria', compact('categoria','posts'));
+        $posts = DB::table('posts')
+            ->join('categoria_posts', 'posts.id', '=', 'categoria_posts.post_id')
+            ->select('*')
+            ->latest()
+            ->where('categoria_id', $id)
+            ->paginate(7);
+        $imagensPost = DB::table('imagem_posts')->get();
+        $usuarios = DB::table('users')->get();
+        return view('categoria', compact('categoria','posts', 'imagensPost', 'usuarios'));
     }
 
     /**

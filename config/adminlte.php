@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>DenunciAqui</b>',
+    'logo' => "<img src='{{asset('/img/logo_f_black.png')}}'>",
 
-    'logo_mini' => '<b>D</b>!',
+    'logo_mini' => '<b>e</b>!',
 
     /*
     |--------------------------------------------------------------------------
@@ -124,12 +124,12 @@ return [
         'Sobre',
         [
             'text' => '',
-            'url'  => 'admin/blog',
+            'url'  => '',
             'can'  => 'manage-blog',
         ],
         [
             'text'        => 'Minhas publicações',
-            'url'         => 'my',
+            'url'         => '/posts',
             'icon'        => 'user',
             
             
@@ -142,28 +142,28 @@ return [
             'submenu' => [
                 [
                     'text' => 'Mobilidade urbana',
-                    'url'  => '',
+                    'url'  => '/categoria/1',
                 ],
                 [
                     'text'    => 'Serviço de saúde',
-                    'url'     => '',
+                    'url'     => '/categoria/2',
 
                 ],
                 [
                     'text' => 'Acessibilidade virtual',
-                    'url'  => '',
+                    'url'  => '/categoria/3',
                 ],
                 [
                     'text' => 'Educação',
-                    'url'  => '',
+                    'url'  => '/categoria/4',
                 ],
                 [
                     'text' => 'Segurança',
-                    'url'  => '',
+                    'url'  => '/categoria/5',
                 ],
                 [
                     'text' => 'Outros',
-                    'url'  => '',
+                    'url'  => '/categoria/6',
                 ],
             ],
         ],
