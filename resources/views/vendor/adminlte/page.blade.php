@@ -145,8 +145,32 @@
         function getUps(id = null){
             return $.post("{{route('api.getups')}}", {id}, function(data){
                 let span = 'span#ups_post_'+id;
-                $(span).text(data);
-                return data;
+                switch(data.statusUp){
+                    case 0:
+                        $(`button#sUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#mUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#lUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        break;
+                    case 1:
+                        $(`button#sUP[data-id_post="${id}"]`).addClass('glyp-selected');
+                        $(`button#mUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#lUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        break;
+                    case 2:
+                        $(`button#sUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#mUP[data-id_post="${id}"]`).addClass('glyp-selected');
+                        $(`button#lUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        break;
+                    case 3:
+                        $(`button#sUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#mUP[data-id_post="${id}"]`).removeClass('glyp-selected');
+                        $(`button#lUP[data-id_post="${id}"]`).addClass('glyp-selected');
+                        break;
+                    default:
+                        break;
+                }
+                $(span).text(data.ups);
+                return data.ups;
             });
         }
 
@@ -171,8 +195,24 @@
         function getLikes(id = null){
             return $.post("{{route('api.getlikes')}}", {id}, function(data){
                 let span = 'span#likes_comment_'+id;
-                $(span).text(data);
-                return data;
+                switch(data.statusLike){
+                    case 0:
+                        $(`button#bLike[data-id_comment="${id}"]`).removeClass('liked');
+                        $(`button#bDislike[data-id_comment="${id}"]`).addClass('disliked');
+                        break;
+                    case 1:
+                        $(`button#bLike[data-id_comment="${id}"]`).addClass('liked');
+                        $(`button#bDislike[data-id_comment="${id}"]`).removeClass('disliked');
+                        break;
+                    case 2:
+                        $(`button#bLike[data-id_comment="${id}"]`).removeClass('liked');
+                        $(`button#bDislike[data-id_comment="${id}"]`).removeClass('disliked');
+                        break;
+                    default:
+                        break;
+                }
+                $(span).text(data.total);
+                return data.total;
             });
         }
 

@@ -93,8 +93,14 @@ class PostController extends Controller
 
     public function upCount(){
         $id = $_POST['id'];
+        $user_id = auth()->user()->id;
+        $statusUp = 0;
         $ups = Up_post::where('post_id',$id)->sum('ups');
-        return $ups;
+        if(Up_post::where('user_id',$user_id)->where('post_id',$id)->count()){
+            $post = Up_post::where('user_id',$user_id)->where('post_id',$id)->get()[0];
+            $statusUp = $post->ups;
+        }
+        return ['ups'=>$ups,'statusUp'=>$statusUp];
     }
 
     /**

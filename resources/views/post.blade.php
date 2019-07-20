@@ -43,7 +43,7 @@
                         </div>
                         <div class="post-footer-up">
                             <button data-id_post="{{$post->id}}" id="sUP" class="glyphicon glyphicon-chevron-up glypS glyp" aria-hidden="true"></button>
-                            <button data-id_post="{{$post->id}}" id="mUP" class="glyphicon glyphicon-chevron-up glypM glyp" aria-hidden="true"></button>
+                            <button data-id_post="{{$post->id}}" id="mUP" class="glyphicon glyphicon-chevron-up glypM glyp glyp-selected" aria-hidden="true"></button>
                             <button data-id_post="{{$post->id}}" id="lUP" class="glyphicon glyphicon-chevron-up glypL glyp" aria-hidden="true"></button>
                         </div>
                     </div>
@@ -91,7 +91,6 @@
                             @if($imagem->comment_id == $comment->id)
                                 <div class="post-photo">
                                     <img src="{{ url("/storage/comments/{$imagem->arquivo}") }}" alt="{{$comment->descricao}}">
-
                                 </div>
 
                             @endif

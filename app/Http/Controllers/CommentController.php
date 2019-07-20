@@ -130,10 +130,21 @@ class CommentController extends Controller
 
     public function likeCount(){
         $id = $_POST['id'];
+        $user_id = auth()->user()->id;
         $likes = Like_comment::where('comment_id',$id)->where('like',true)->count();
         $dislike = Like_comment::where('comment_id',$id)->where('dislike',true)->count();
         $total = $likes - $dislike;
-        return $total;
+        $statusLike = 2;
+        if(Like_comment::where('comment_id',$id)->where('user_id',auth()->user()->id)->count()){
+            $comment = Like_comment::where('user_id',$user_id)->where('comment_id',$id)->get()[0];
+            if($comment->like == 1){
+                $statusLike = 1;
+            } elseif($comment->dislike == 1){
+                $statusLike = 0;
+            }
+        }
+
+        return ['total'=>$total, 'statusLike'=>$statusLike];
 
     }
 

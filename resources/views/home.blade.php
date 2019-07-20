@@ -98,18 +98,16 @@
                         @endforeach
 
                             <div class="post-footer">
-                            <a href="{{route('post.comment', ['id'=>$postItem->id])}}">
                                 <div class="post-footer-desc" >
                                     {{$postItem->descricao}}
                                 </div>
-                            </a>
 
                     @else
 
                     @endif
                         <div class="post-footer-ups">
                             <div class="post-footer-time">
-                                {{$postItem->created_at}}
+                                {{$postItem->created_at}} <a href="{{route('post.comment', ['id'=>$postItem->id])}}">Ver comentários</a>
                             </div>
                             <div class="post-footer-up">
                                 <button data-id_post="{{$postItem->id}}" id="sUP" class="glyphicon glyphicon-chevron-up glypS glyp" aria-hidden="true"></button>

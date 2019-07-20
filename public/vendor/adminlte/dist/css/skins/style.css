@@ -17,6 +17,9 @@
     .posts {
         width: 100%;
     }
+    .posts-container {
+        width: 100%;
+    }
     .post-comment {
         width: 100% !important;
     }
@@ -132,11 +135,13 @@
     border: none;
     background: none;
     outline: none;
+    padding-bottom: 6px;
+    padding-left: 6px;
 }
 
 .glyp:hover {
     background-color: #f3f3f3;
-    border-radius: 100%;
+    border-radius: 100% !important;
 }
 
 .glypS {
@@ -229,6 +234,12 @@
 
 .glyp-like {
     cursor: pointer;
+    border: none;
+    background: #FFF;
+}
+
+.liked {
+    color: green;
 }
 
 .glyp-like:hover {
@@ -237,10 +248,28 @@
 
 .glyp-dislike {
     cursor: pointer;
+    border: none;
+    background: #FFF;
+}
+
+.disliked {
+    color: red;
 }
 
 .glyp-dislike:hover {
     color: red;
+}
+
+.glyp-selected {
+    background-color: #555;
+    color: white;
+    border-radius: 100%;
+}
+
+.glyp-selected:hover {
+    background-color: #555;
+    color: white;
+    border-radius: 100%;
 }
 
 .comment-footer {
