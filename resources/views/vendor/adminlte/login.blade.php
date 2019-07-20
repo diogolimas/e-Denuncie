@@ -1,4 +1,4 @@
-@extends('adminlte::master')
+@extends('adminlte::masterOne')
 
 @section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins/iCheck/square/blue.css') }}">
@@ -9,15 +9,16 @@
 @section('body_class', 'login-page')
 
 @section('body')
+
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">
-                <img src="{{asset('/img/logo_f_black.png')}}" width="150px" alt="logo do e-denuncie">
+                <img src="{{asset('/img/logo_f_white.png')}}" width="150px" alt="logo do e-denuncie">
             </a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">{{ trans('adminlte::adminlte.login_message') }}</p>
+            <p class="login-boxs-msg">{{ trans('adminlte::adminlte.login_message') }}</p>
             <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="post">
                 {!! csrf_field() !!}
 
