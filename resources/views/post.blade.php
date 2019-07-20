@@ -4,14 +4,9 @@
 
 @section('content_header')
     <!-- <h1>Dashboard</h1> -->
-    <button class="testee" onclick="getMessage();"></button>
 @stop
 
 @section('content')
-
-
-    <div id='msg'>This message will be replaced using Ajax. 
-         Click the button to replace the message.</div>
 
     <div class="posts-container">
         <div class="posts post-comments">
@@ -63,16 +58,20 @@
                     {!!csrf_field()!!}
                     <input type="hidden" name="post_id" value="{{$id}}">
                     <textarea name="descricao" class="send-form-text" rows="2" placeholder="Digite um comentário"></textarea>
-                    <div class="form-group">
+                    <div class="form-group img-desc none">
                         <label class="label-desc">Descrição da imagem:</label>
                         <input type="text" class="form-control" name="descricaoImagem" id="">
                     </div>
                     <div class="send-form-sends">
-                        <span class="btn btn-primary btn-file">
-                            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
-                            <input type="file" name="imagem" accept="image/*">
-                        </span>
-                        <button type="submit" class="btn btn-success">Postar</button>
+                        <div class="dpf">
+                            <button type="button" onclick="return null" class="actionBtn fileBtn"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
+                            <button type="button" onclick="return null" class="inputFileText mright none" style="border-radius: 0 5px 5px 0; color: white;"></button>
+                            <input type="file" id="fileUpload" name="imagem" class="fileInput" accept="image/*">
+
+                            <button type="button" onclick="return null" class="actionBtn fileRemoveBtn none"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Comentar</button>
                     </div>
                     
                 </form>
