@@ -165,6 +165,29 @@
         }
 
     $(function() {
+
+        $('.fileBtn').on('click', function() {
+            $('.fileInput').trigger('click');
+        });
+        
+        $('.fileInput').on('change', function() {
+            fileName = $(this)[0].files[0].name;
+            $('.fileRemoveBtn').removeClass('none');
+            $('.inputFileText').removeClass('none');
+            $('.fileBtn').addClass('nobrright');
+            $('.inputFileText').html(fileName);
+            $('.img-desc').removeClass('none');
+        });
+
+        $('.fileRemoveBtn').on('click', function() {
+            $('.fileInput').val('');
+            $('.fileRemoveBtn').addClass('none');
+            $('.inputFileText').addClass('none');
+            $('.fileBtn').removeClass('nobrright');
+            $('.inputFileText').html(fileName);
+            $('.img-desc').addClass('none');
+        });
+
         $('#msg').click(function(){
             getUps(1);
         });
