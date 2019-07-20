@@ -46,6 +46,11 @@ composer install
 ```
     php artisan migrate:fresh --seed
 ```
+-  Execute o seguinte comando no terminal para linkar as imagens:
+```
+    php artisan storage:link
+```
+
 -  Execute no terminal também:
 ```
     php artisan serve
