@@ -83,7 +83,10 @@ class PostController extends Controller
         } else {
             $id = Up_post::where('user_id',$user_id)->where('post_id',$post_id)->get()[0];
             $objeto = Up_post::find($id->id);
-            $objeto->ups = $ups;
+            if($objeto->ups == $ups)
+                $objeto->ups = 0;
+            else
+                $objeto->ups = $ups;
             $objeto->save();
         }
     }

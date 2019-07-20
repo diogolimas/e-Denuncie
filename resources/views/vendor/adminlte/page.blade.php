@@ -143,28 +143,31 @@
 
         function getUps(id = null){
             return $.post("{{route('api.getups')}}", {id}, function(data){
+                let span = 'span#ups_post_'+id;
+                $(span).text(data);
                 return data;
             });
         }
 
         async function setUps(id = null, ups = 0){
-            console.log('k')
-            await $.post("{{route('api.setups')}}", {id,ups}, function(data){
-                // console.log('asd')
-                // let span = 'span#ups_post'+id; 
-                // let up = await getUps(id);
-                // console.log(data)
-                // console.log(up);
-                // $(span).text(up);
-            });
-            console.log('a')
-            let span = 'span#ups_post'+id; 
-                let up = await getUps(id);
-                console.log(up);
-                $(span).text(up);
+            await $.post("{{route('api.setups')}}", {id,ups});
+            let up = await getUps(id);
+        }
+
+        function reloadUps(){
+            if ($('span[id]').length){
+                Object.keys($('span[id]')).map(teste=>{
+                    if($('span[id]')[teste].attributes && $('span[id]')[teste].attributes.id){
+                        let span = $('span[id]')[teste].attributes.id.value;
+                        let post_id = span.substr('ups_post_'.length);
+                        getUps(post_id);
+                    }
+                })
+            }
         }
 
     $(function() {
+        reloadUps();
 
         $('.fileBtn').on('click', function() {
             $('.fileInput').trigger('click');
@@ -188,23 +191,19 @@
             $('.img-desc').addClass('none');
         });
 
-        $('#msg').click(function(){
-            getUps(1);
-        });
-
         $('button#lUP').click(function(e){
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post'+idpost; 
+            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,3);
         });
-
+        
         $('button#mUP').click(function(e){
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post'+idpost; 
+            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,2);
         });
 
@@ -212,7 +211,7 @@
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post'+idpost; 
+            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,1);
         });
         
