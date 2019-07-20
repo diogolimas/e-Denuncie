@@ -84,11 +84,7 @@ class PostController extends Controller
 
 
     }
-    public function createCategoria(Request $request){
-        Categoria::create([
-           'nome' => $request->descricao,
-        ]);
-    }
+
     public function upCount(){
         $id = $_POST['id'];
         $ups = Up_post::where('post_id',$id)->sum('ups');
