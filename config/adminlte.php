@@ -142,28 +142,28 @@ return [
             'submenu' => [
                 [
                     'text' => 'Mobilidade urbana',
-                    'url'  => '',
+                    'url'  => '/categoria/1',
                 ],
                 [
                     'text'    => 'Serviço de saúde',
-                    'url'     => '',
+                    'url'     => '/categoria/2',
 
                 ],
                 [
                     'text' => 'Acessibilidade virtual',
-                    'url'  => '',
+                    'url'  => '/categoria/3',
                 ],
                 [
                     'text' => 'Educação',
-                    'url'  => '',
+                    'url'  => '/categoria/4',
                 ],
                 [
                     'text' => 'Segurança',
-                    'url'  => '',
+                    'url'  => '/categoria/5',
                 ],
                 [
                     'text' => 'Outros',
-                    'url'  => '',
+                    'url'  => '/categoria/6',
                 ],
             ],
         ],

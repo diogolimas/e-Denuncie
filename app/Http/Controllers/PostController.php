@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria_post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\User;
@@ -35,40 +36,45 @@ class PostController extends Controller
      */
     public function create(Request $request, Post $post)
     {
-        $nameFile = '';
-        $originalName = '';
-        if(isset($request->imagem)) {
-            $originalName = $request->imagem->getClientOriginalName();
-            $name = time();
-            $extension = $request->imagem->extension();
-            $nameFile = "{$name}.{$extension}";
-        }
+         $nameFile = '';
+         $originalName = '';
+         if(isset($request->imagem)) {
+             $originalName = $request->imagem->getClientOriginalName();
+             $name = time();
+             $extension = $request->imagem->extension();
+             $nameFile = "{$name}.{$extension}";
+         }
 
-        $this->validate($request, $post->rules);
+         $this->validate($request, $post->rules);
 
-        $insertarpost = Post::create([
-            'descricao' => $request->descricao,
-            'user_id'   => auth()->user()->id,
-        ]);
+         $insertarpost = Post::create([
+             'descricao' => $request->descricao,
+             'user_id'   => auth()->user()->id,
+         ]);
+         
+         $insertarCategoria = Categoria_post::insert([
+            'post_id'       => $insertarpost->id,
+            'categoria_id'  => $request->categoria,
+         ]);
 
-        if(isset($request->imagem)){
-            $insertarimagem = Imagem_post::create([
-                'nome'  =>     $originalName,
-                'descricao' => $request->descricaoImagem,
-                'arquivo'  =>  $nameFile,
-                'post_id'  =>  $insertarpost->id,
-            ]);
-        }
+         if(isset($request->imagem)){
+             $insertarimagem = Imagem_post::create([
+                 'nome'  =>     $originalName,
+                 'descricao' => $request->descricaoImagem,
+                 'arquivo'  =>  $nameFile,
+                 'post_id'  =>  $insertarpost->id,
+             ]);
+         }
 
-        if($insertarpost){
-            if(isset($request->imagem)){
-                $add = $request->imagem->storeAs('posts', $nameFile);
+         if($insertarpost){
+             if(isset($request->imagem)){
+                 $add = $request->imagem->storeAs('posts', $nameFile);
 
-                return redirect()->route('home',['success' => 'Post publicado com sucesso']);
-            }else{
-                return redirect()->route('home',['success' => 'Post publicado com sucesso']);
-            }
-        }
+                 return redirect()->route('home',['success' => 'Post publicado com sucesso']);
+             }else{
+                 return redirect()->route('home',['success' => 'Post publicado com sucesso']);
+             }
+         }
     }
     public function upPost(){
         $post_id = $_POST['id'];
