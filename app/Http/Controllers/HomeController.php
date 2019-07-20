@@ -36,4 +36,23 @@ class HomeController extends Controller
         
         return view('home', compact('success','posts','imagensPost','usuarios'));
     }
+
+    public function myPosts(Request $request)
+    {
+        $success = $request->success;
+        $user_id = auth()->user()->id;
+        $posts = DB::table('posts')
+                    ->where('user_id',$user_id)
+                    ->latest()
+                    ->paginate(9);
+        $imagensPost = DB::table('imagem_posts')
+                          ->join('posts', 'posts.id', '=', 'imagem_posts.post_id')
+                          ->where('posts.user_id',$user_id)
+                          ->get();
+        $usuarios = DB::table('users')
+                       ->where('id',$user_id)
+                       ->get();
+        
+        return view('home', compact('success','posts','imagensPost','usuarios'));
+    }
 }

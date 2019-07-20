@@ -17,6 +17,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/posts', 'HomeController@myPosts')->name('myPosts');
 
     Route::post('/postar','PostController@create')->name('postar.denuncia');
 
@@ -25,6 +26,7 @@ Route::group(['middleware' => ['auth']],function(){
     //Route::get('comment/create/','')->name();
 
     Route::get('/post/{id}/comments', 'PostController@show')->name('post.comment');
+
 
     //
     Route::post('/api/getups','PostController@upCount')->name('api.getups');
