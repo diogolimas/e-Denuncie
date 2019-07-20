@@ -52,7 +52,3 @@ composer install
 ```
 - Acesse a url no navegador por "localhost:8000" ou "127.0.0.1:8000";
       
-          
-##  Na distribuição Linux
-   
-- Crie um banco de dados
