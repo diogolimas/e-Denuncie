@@ -30,11 +30,13 @@
                     </div>
                 </div>
                 <div class="post-photo">
-                    @if(isset($imagemPost))
-                        <div class="post-photo">
-                            <img src="{{ url("/storage/post/{$imagem->arquivo}") }}" alt="{{$comment->descricao}}">
-                        </div>
-                    @endif
+                    @foreach ($imagensPost as $imagem)
+                        @if(isset($imagem))
+                            <div class="post-photo">
+                                <img src="{{ url("/storage/posts/{$imagem->arquivo}") }}" alt="{{$post->descricao}}">
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="post-footer">
                     <div class="post-footer-desc">

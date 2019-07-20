@@ -114,24 +114,26 @@ class PostController extends Controller
      */
     public function show($id, Request $request)
     {
-        $imagensComment = DB::table('imagem_comments')->get();
+        //Coisas do post
+        $post = Post::find($id);
+        $author_post = User::find($post->user_id);
         $success = $request->success;
         $nome = 'asd';
         $comments = DB::table('comments')->where('post_id',$id)->latest()->get();
         $users = null;
-        $post = Post::find($id);
         $imagensPost = DB::table('imagem_posts')->get();
         $imagemPost = null;
         foreach ($imagensPost as $imagem){
             if ($imagem->post_id = $id)
-                $imagemPost = $imagem;
+                $imagemPost[$imagem->id] = $imagem;
         }
-        $author_post = User::find($post->user_id);
+        //Coisas dos comentários
+        $imagensComment = DB::table('imagem_comments')->get();
         foreach ($comments as $comment){
             $user = User::find($comment->user_id);
             $users[$user->id] = $user->name;
         }
-        return view('post', compact('id','nome', 'comments', 'users','imagensComment','success', 'post','author_post'));
+        return view('post', compact('id','nome', 'comments', 'users','imagensComment','success', 'post','author_post', 'imagensPost'));
     }
 
     /**

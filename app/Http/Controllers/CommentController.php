@@ -91,12 +91,11 @@ class CommentController extends Controller
     }
 
     public function likeComment(Request $request, $id){
-        if (auth()->user->table == 'users') $tipo = 'user_id';
-        else $tipo = 'instituicao_id';
-        Like_comment::create([
-            $tipo => auth()->user()->id,
+        $sucesso = Like_comment::create([
+            'user_id' => auth()->user()->id,
             'comment_id' => $id,
         ]);
+
     }
 
     public function store(Request $request)
