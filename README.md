@@ -20,9 +20,9 @@
 ## Nas distribuições Linux e Windows:
    
  - Pré-requisitos:
-  - PHP>=7.1;
-  - Banco de dados com MySQL;
-  - Composer;   
+      - PHP>=7.1;
+      - Banco de dados com MySQL;
+      - Composer;   
   ***Para windows é nessário baixar o git bash; para linux, o git;***
 - Clone o projeto por desse repositório:
 - Abra seu terminal dentro do repositório já clonado;
