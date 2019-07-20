@@ -142,22 +142,26 @@
         });
 
         function getUps(id = null){
-            $.post("{{route('api.getups')}}", {id}, function(data){
-                alert(data);
+            return $.post("{{route('api.getups')}}", {id}, function(data){
                 return data;
-                /*
-                alert(data)
-                console.log(data)
-                $("#msg").html(data.msg);*/
             });
         }
 
-        function setUps(id = null, ups){
-            $.post("{{route('api.setups')}}", {id,ups}, function(data){
-                alert(data);
+        async function setUps(id = null, ups = 0){
+            console.log('k')
+            await $.post("{{route('api.setups')}}", {id,ups}, function(data){
+                // console.log('asd')
                 // let span = 'span#ups_post'+id; 
-                // $(span).text(parseInt(getUps());
+                // let up = await getUps(id);
+                // console.log(data)
+                // console.log(up);
+                // $(span).text(up);
             });
+            console.log('a')
+            let span = 'span#ups_post'+id; 
+                let up = await getUps(id);
+                console.log(up);
+                $(span).text(up);
         }
 
     $(function() {
@@ -171,7 +175,6 @@
             let idpost = $(this).data('id_post');
             let span = 'span#ups_post'+idpost; 
             setUps(idpost,3);
-            // $(span).text(parseInt($(span).text())+3);
         });
 
         $('button#mUP').click(function(e){
@@ -179,7 +182,7 @@
             
             let idpost = $(this).data('id_post');
             let span = 'span#ups_post'+idpost; 
-            $(span).text(parseInt($(span).text())+2);
+            setUps(idpost,2);
         });
 
         $('button#sUP').click(function(e){
@@ -187,7 +190,7 @@
             
             let idpost = $(this).data('id_post');
             let span = 'span#ups_post'+idpost; 
-            $(span).text(parseInt($(span).text())+1);
+            setUps(idpost,1);
         });
         
     });

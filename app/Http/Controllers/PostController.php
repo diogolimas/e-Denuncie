@@ -71,18 +71,21 @@ class PostController extends Controller
         }
     }
     public function upPost(){
-        $id = $_POST['id'];
+        $post_id = $_POST['id'];
         $ups = $_POST['ups'];
-        return $ups;
-        if (auth()->user()->table == 'users') $tipo = 'user_id';
-        else $tipo = 'instituicao_id';
-        Up_post::create([
-            $tipo => auth()->user()->id,
-            'post_id' => $id,
-            'ups' => $ups,
-        ]);
-
-
+        $user_id = auth()->user()->id;
+        if(!Up_post::where('user_id',$user_id)->where('post_id',$post_id)->count()){
+            Up_post::create([
+                'user_id' => auth()->user()->id,
+                'post_id' => $post_id,
+                'ups' => $ups,
+            ]);
+        } else {
+            $id = Up_post::where('user_id',$user_id)->where('post_id',$post_id)->get()[0];
+            $objeto = Up_post::find($id->id);
+            $objeto->ups = $ups;
+            $objeto->save();
+        }
     }
     public function createCategoria(Request $request){
         Categoria::create([
