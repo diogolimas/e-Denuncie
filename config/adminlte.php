@@ -116,7 +116,7 @@ return [
         ],
         [
             'text'        => 'Página inicial',
-            'url'         => 'admin/pages',
+            'url'         => '/',
             'icon'        => 'home',
             
             
@@ -129,7 +129,7 @@ return [
         ],
         [
             'text'        => 'Minhas publicações',
-            'url'         => 'admin/pages',
+            'url'         => 'my',
             'icon'        => 'user',
             
             
