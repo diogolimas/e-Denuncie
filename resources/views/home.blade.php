@@ -21,35 +21,45 @@
         </div>
     @endif
 
-        <div class="posts-container">
+    <div class="flex-grid">
+        <div class="side-div">
             <div class="send-form">
                 <form action="{{route('postar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
-                    <select name="" id="">
-                        <option value="">Mobilidade urbana</option>
-                        <option value="">Serviço de saúde</option>
-                        <option value="">Acessibilidade virtual</option>
-                        <option value="">Educação</option>
-                        <option value="">Segurança</option>
-                        <option value="">Outros</option>
-                        <input type="text" name="descricao_outros">
-                    </select>
-                    <div class="form-group">
+                    <div class="categories">
+                        <select class="categories-select">
+                            <option value="">Mobilidade urbana</option>
+                            <option value="">Serviço de saúde</option>
+                            <option value="">Acessibilidade virtual</option>
+                            <option value="">Educação</option>
+                            <option value="">Segurança</option>
+                            <option value="">Outros</option>
+                        </select>
+                        <input type="text" class="categories-others" placeholder="Outros...">
+                    </div>
+
+                    <div class="form-group img-desc none">
                         <label class="label-desc">Descrição da imagem:</label>
                         <input type="text" class="form-control" name="descricaoImagem" id="">
                     </div>
                     <div class="send-form-sends">
-                        <span class="btn btn-primary btn-file">
-                            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
-                            <input type="file" name="imagem" accept="image/*">
-                        </span>
+                        <div class="dpf">
+                            <button type="button" onclick="return null" class="actionBtn fileBtn"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
+                            <button type="button" onclick="return null" class="inputFileText mright none" style="border-radius: 0 5px 5px 0; color: white;"></button>
+                            <input type="file" id="fileUpload" name="imagem" class="fileInput" accept="image/*">
+
+                            <button type="button" onclick="return null" class="actionBtn fileRemoveBtn none"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        </div>
+
                         <button type="submit" class="btn btn-success">Postar</button>
                     </div>
 
                 </form>
             </div>
+        </div>
 
+        <div class="posts-container">
             @if(isset($posts))
 
             @foreach ($posts as $postItem)
@@ -66,7 +76,13 @@
                                 @endif
                             @endforeach
                         </p>
-                        <div class="post-header-ups"><span id="ups_post{{$postItem->id}}" >0</span>UP's</div>
+                        <div class="post-header-ups">
+                            <span>
+                                <span id="ups_post{{$postItem->id}}" >0</span>
+                                <span class="glyphicon glyphicon-chevron-up post-header-ups-up" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-option-vertical post-header-option" aria-hidden="true"></span>
+                            </span>
+                        </div>
                     </div>
                     @if(isset($imagensPost))
                     @foreach ($imagensPost as $imagem)
@@ -95,9 +111,9 @@
                                 {{$postItem->created_at}}
                             </div>
                             <div class="post-footer-up">
-                                <button data-id_post="{{$postItem->id}}" id="sUP" class="glyphicon glyphicon-menu-up glypS glyp" aria-hidden="true"></button>
-                                <button data-id_post="{{$postItem->id}}" id="mUP" class="glyphicon glyphicon-menu-up glypM glyp" aria-hidden="true"></button>
-                                <button data-id_post="{{$postItem->id}}" id="lUP" class="glyphicon glyphicon-menu-up glypL glyp" aria-hidden="true"></button>
+                                <button data-id_post="{{$postItem->id}}" id="sUP" class="glyphicon glyphicon-chevron-up glypS glyp" aria-hidden="true"></button>
+                                <button data-id_post="{{$postItem->id}}" id="mUP" class="glyphicon glyphicon-chevron-up glypM glyp" aria-hidden="true"></button>
+                                <button data-id_post="{{$postItem->id}}" id="lUP" class="glyphicon glyphicon-chevron-up glypL glyp" aria-hidden="true"></button>
                             </div>
                         </div>
                     </div>
@@ -111,6 +127,7 @@
 
 
         </div>
+    </div>
     </div>
     
 @stop

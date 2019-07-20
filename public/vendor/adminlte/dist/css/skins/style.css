@@ -3,15 +3,38 @@
     margin-bottom: 20px;
 }
 
+.flex-grid {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 @media only screen and (max-width: 700px) {
+    .side-div {
+        width: 100%;
+    }
     .posts {
         width: 100%;
+    }
+    .post-comment {
+        width: 100% !important;
     }
     .send-form {
         width: 100% !important;
     }
     .comments {
         width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .flex-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .posts-container {
+        margin-right: 0 !important;
     }
 }
 
@@ -33,6 +56,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-right: 50px;
 }
 
 .post-header {
@@ -105,6 +129,9 @@
     padding: 5px !important;
     cursor: pointer;
     color: #2c2c2c;
+    border: none;
+    background: none;
+    outline: none;
 }
 
 .glyp:hover {
@@ -145,13 +172,14 @@
 
 .send-form-text {
     width: 100%;
-    border: 2px solid #0d6aad;
+    /* border: 2px solid #0d6aad; */
     border-radius: 3px;
     padding: 10px;
     word-wrap: break-word;
     height: auto;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     resize: none;
+    font-size: 16px;
 }
 
 .send-form-sends {
@@ -231,4 +259,70 @@
 .label-desc {
     color: #2c2c2c;
     font-weight: 400;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.categories-select {
+    width: 70%;
+    padding: 6px;
+    border: none;
+    background-color: #F3F3F3;
+    outline: none;
+}
+
+.categories-others {
+    padding: 6px 15px;
+    border: none;
+    background-color: #F3F3F3;
+    outline: none;
+    margin-left: 15px;
+}
+
+.dpf {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.actionBtn {
+    background: #0d6aad;
+    border: none;
+    width: 40px;
+    height: 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border-radius: 3px;
+}
+
+.inputFileText {
+    background: #0d5e97;
+    padding: 0 20px;
+    border-radius: 0 3px 3px 0;
+    border: none;
+    outline: none;
+}
+
+.fileRemoveBtn {
+    margin-left: 10px;
+}
+
+.nobrright {
+    border-radius: 3px 0 0 3px;
+}
+
+.none {
+    display: none !important;
+}
+
+.fileInput {
+    display: none !important;
 }
