@@ -3,7 +3,7 @@
 </p>
     
 # e-Denuncie: rede social para denúncias com indicadores 
-###  Projeto criado para o evento Hackfest (2019), do Ministério Público do Rio Grande do Norte
+###  Projeto criado para o evento [Hackfest](https://hackfest.imd.ufrn.br/) (2019), do Ministério Público do Rio Grande do Norte
 ####  Equipe de desenvolvimento:
 
 <a  href="https://github.com/alanigma">Alan Sol Dias Aves</a>
