@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5b570e1-cef1-48db-a9c5-91d03a23eb71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/categoria.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Categoria_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Categoria_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -270,12 +266,12 @@
       <workItem from="1563471577807" duration="14323000" />
       <workItem from="1563537169417" duration="26102000" />
       <workItem from="1563568429466" duration="57000" />
-      <workItem from="1563568512292" duration="12735000" />
+      <workItem from="1563568512292" duration="13200000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53217000" />
+    <option name="totallyTimeSpent" value="53682000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
