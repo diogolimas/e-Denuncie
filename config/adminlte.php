@@ -116,7 +116,7 @@ return [
         ],
         [
             'text'        => 'Página inicial',
-            'url'         => 'admin/pages',
+            'url'         => '/',
             'icon'        => 'home',
             
             
@@ -124,12 +124,12 @@ return [
         'Sobre',
         [
             'text' => '',
-            'url'  => 'admin/blog',
+            'url'  => '',
             'can'  => 'manage-blog',
         ],
         [
             'text'        => 'Minhas publicações',
-            'url'         => 'admin/pages',
+            'url'         => '/posts',
             'icon'        => 'user',
             
             

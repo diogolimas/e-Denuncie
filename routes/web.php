@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']],function(){
 
     Route::get('/post/{id}/comments', 'PostController@show')->name('post.comment');
 
+
     //
     Route::post('/api/getups','PostController@upCount')->name('api.getups');
     Route::post('/api/setups','PostController@upPost')->name('api.setups');
