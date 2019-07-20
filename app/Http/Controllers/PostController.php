@@ -51,10 +51,11 @@ class PostController extends Controller
              'descricao' => $request->descricao,
              'user_id'   => auth()->user()->id,
          ]);
-         
+         if (isset($request->categoria)) $categoria = $request->categoria;
+         else $categoria = 6;
          $insertarCategoria = Categoria_post::insert([
             'post_id'       => $insertarpost->id,
-            'categoria_id'  => $request->categoria,
+            'categoria_id'  => $categoria
          ]);
 
          if(isset($request->imagem)){
@@ -129,12 +130,9 @@ class PostController extends Controller
         $nome = 'asd';
         $comments = DB::table('comments')->where('post_id',$id)->latest()->get();
         $users = null;
-        $imagensPost = DB::table('imagem_posts')->get();
+        $imagensPost = DB::table('imagem_posts')->where('post_id',$id)->get();
         $imagemPost = null;
-        foreach ($imagensPost as $imagem){
-            if ($imagem->post_id = $id)
-                $imagemPost[$imagem->id] = $imagem;
-        }
+
         //Coisas dos comentários
         $imagensComment = DB::table('imagem_comments')->get();
         foreach ($comments as $comment){
