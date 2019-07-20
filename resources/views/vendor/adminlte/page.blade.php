@@ -181,8 +181,21 @@
             await getLikes(id);
         }
 
+        function reloadLikes(){
+            if ($('span[id]').length){
+                Object.keys($('span[id]')).map(teste=>{
+                    if($('span[id]')[teste].attributes && $('span[id]')[teste].attributes.id){
+                        let span = $('span[id]')[teste].attributes.id.value;
+                        let comment_id = span.substr('likes_comment_'.length);
+                        getLikes(comment_id);
+                    }
+                })
+            }
+        }
+
     $(function() {
         reloadUps();
+        reloadLikes();
 
         $('.fileBtn').on('click', function() {
             $('.fileInput').trigger('click');
