@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth']],function(){
     //
     Route::post('/api/getups','PostController@upCount')->name('api.getups');
     Route::post('/api/setups','PostController@upPost')->name('api.setups');
+
+    Route::get('/categoria/{id}','CategoriaController@index')->name('categorias');
 });
 
 

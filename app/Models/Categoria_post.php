@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria_post extends Model
 {
     protected $fillable = [
-        'post_id' 'categoria_id'
+        'post_id' ,'categoria_id'
     ];
 }
