@@ -141,6 +141,7 @@
             }
         });
 
+        // UPS POSTS
         function getUps(id = null){
             return $.post("{{route('api.getups')}}", {id}, function(data){
                 let span = 'span#ups_post_'+id;
@@ -164,6 +165,20 @@
                     }
                 })
             }
+        }
+
+        // LIKES COMMENTS
+        function getLikes(id = null){
+            return $.post("{{route('api.getlikes')}}", {id}, function(data){
+                let span = 'span#likes_comment_'+id;
+                $(span).text(data);
+                return data;
+            });
+        }
+
+        async function setLikes(id = null, like = false){
+            await $.post("{{route('api.setlikes')}}", {id,like});
+            let likes = await getLikes(id);
         }
 
     $(function() {
@@ -195,7 +210,6 @@
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,3);
         });
         
@@ -203,7 +217,6 @@
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,2);
         });
 
@@ -211,8 +224,27 @@
             e.preventDefault();
             
             let idpost = $(this).data('id_post');
-            let span = 'span#ups_post_'+idpost; 
             setUps(idpost,1);
+        });
+
+        $('button#bLike').click(function(e){
+            e.preventDefault();
+            
+            let idcomment = $(this).data('id_comment');
+            let span = 'span#likes_comment_'+idcomment;
+            // setUps(idpost,3);
+            // console.log(span)
+            setLikes(idcomment,1);
+        });
+
+        $('button#bDislike').click(function(e){
+            e.preventDefault();
+            
+            let idcomment = $(this).data('id_comment');
+            let span = 'span#likes_comment_'+idcomment;
+            // setUps(idpost,3);
+            // console.log(span)
+            setLikes(idcomment,0);
         });
         
     });

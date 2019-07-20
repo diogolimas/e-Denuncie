@@ -18,7 +18,7 @@
                     </span>
                     <div class="post-header-ups">
                         <span>
-                            <span>98</span>
+                            <span id="ups_post_{{$post->id}}" >0</span>
                             <span class="glyphicon glyphicon-chevron-up post-header-ups-up" aria-hidden="true"></span>
                             <span class="glyphicon glyphicon-option-vertical post-header-option" aria-hidden="true"></span>
                         </span>
@@ -42,9 +42,9 @@
                             Hoje, 19:34
                         </div>
                         <div class="post-footer-up">
-                            <span class="glyphicon glyphicon-chevron-up glypS glyp" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-chevron-up glypM glyp" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-chevron-up glypL glyp" aria-hidden="true"></span>
+                            <button data-id_post="{{$post->id}}" id="sUP" class="glyphicon glyphicon-chevron-up glypS glyp" aria-hidden="true"></button>
+                            <button data-id_post="{{$post->id}}" id="mUP" class="glyphicon glyphicon-chevron-up glypM glyp" aria-hidden="true"></button>
+                            <button data-id_post="{{$post->id}}" id="lUP" class="glyphicon glyphicon-chevron-up glypL glyp" aria-hidden="true"></button>
                         </div>
                     </div>
                 </div>
@@ -98,9 +98,9 @@
                         @endforeach
                     @endif
                     <div class="comment-footer">
-                        <span class="glyphicon glyphicon-thumbs-up glyp-like" title="Gostei" aria-hidden="true"></span>
-                        <span>122</span>
-                        <span class="glyphicon glyphicon-thumbs-down glyp-dislike" title="Não Gostei" aria-hidden="true"></span>
+                        <button data-id_comment="{{$comment->id}}" id="bLike" class="glyphicon glyphicon-thumbs-up glyp-like" title="Gostei" aria-hidden="true"></button>
+                        <span id="likes_comment_{{$comment->id}}" >0</span>
+                        <button data-id_comment="{{$comment->id}}" id="bDislike" class="glyphicon glyphicon-thumbs-down glyp-dislike" title="Não Gostei" aria-hidden="true"></button>
                     </div>
                 </div>
             @endforeach

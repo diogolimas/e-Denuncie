@@ -76,7 +76,7 @@ class PostController extends Controller
         $user_id = auth()->user()->id;
         if(!Up_post::where('user_id',$user_id)->where('post_id',$post_id)->count()){
             Up_post::create([
-                'user_id' => auth()->user()->id,
+                'user_id' => $user_id,
                 'post_id' => $post_id,
                 'ups' => $ups,
             ]);
