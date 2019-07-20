@@ -16,16 +16,25 @@
     @if(isset($errors) && count($errors) > 0)
         <div class="alert alert-danger">
             @foreach ($errors->all() as $error)
-                <p>{{$error}}</p>  
+                <p>{{$error}}</p>
             @endforeach
         </div>
     @endif
-        
+
         <div class="posts-container">
             <div class="send-form">
                 <form action="{{route('postar.denuncia')}}" method="post" enctype="multipart/form-data">
                     {!!csrf_field()!!}
                     <textarea name="descricao" class="send-form-text" rows="4" placeholder="Digite a sua denúncia"></textarea>
+                    <select name="" id="">
+                        <option value="">Mobilidade urbana</option>
+                        <option value="">Serviço de saúde</option>
+                        <option value="">Acessibilidade virtual</option>
+                        <option value="">Educação</option>
+                        <option value="">Segurança</option>
+                        <option value="">Outros</option>
+                        <input type="text" name="descricao_outros">
+                    </select>
                     <div class="form-group">
                         <label class="label-desc">Descrição da imagem:</label>
                         <input type="text" class="form-control" name="descricaoImagem" id="">
@@ -37,18 +46,18 @@
                         </span>
                         <button type="submit" class="btn btn-success">Postar</button>
                     </div>
-                    
+
                 </form>
             </div>
 
             @if(isset($posts))
-                
+
             @foreach ($posts as $postItem)
-            
+
             <div class="posts">
                 <div class="post">
                     <div class="post-header">
-                        
+
                         <p class="post-header-name">
                             @foreach ($usuarios as $usuario)
                                 @if($postItem->user_id == $usuario->id)
@@ -61,23 +70,23 @@
                     </div>
                     @if(isset($imagensPost))
                     @foreach ($imagensPost as $imagem)
-                    
+
                         @if($imagem->post_id == $postItem->id)
-                        
+
                             <div class="post-photo">
                                 <img src="{{ url("/storage/posts/{$imagem->arquivo}") }}" alt="{{$postItem->descricao}}">
                             </div>
-                             
+
                         @endif
                         @endforeach
-                        
+
                             <div class="post-footer">
                             <a href="{{route('post.comment', ['id'=>$postItem->id])}}">
                                 <div class="post-footer-desc" >
-                                    {{$postItem->descricao}}    
+                                    {{$postItem->descricao}}
                                 </div>
                             </a>
-                   
+
                     @else
 
                     @endif

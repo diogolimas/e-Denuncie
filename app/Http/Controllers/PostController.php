@@ -87,11 +87,7 @@ class PostController extends Controller
             $objeto->save();
         }
     }
-    public function createCategoria(Request $request){
-        Categoria::create([
-           'nome' => $request->descricao,
-        ]);
-    }
+
     public function upCount(){
         $id = $_POST['id'];
         $ups = Up_post::where('post_id',$id)->sum('ups');
@@ -117,17 +113,26 @@ class PostController extends Controller
      */
     public function show($id, Request $request)
     {
-        $imagensComment = DB::table('imagem_comments')->get();
+        //Coisas do post
+        $post = Post::find($id);
+        $author_post = User::find($post->user_id);
         $success = $request->success;
         $nome = 'asd';
-        $comments = Comment::all();
+        $comments = DB::table('comments')->where('post_id',$id)->latest()->get();
         $users = null;
+        $imagensPost = DB::table('imagem_posts')->get();
+        $imagemPost = null;
+        foreach ($imagensPost as $imagem){
+            if ($imagem->post_id = $id)
+                $imagemPost[$imagem->id] = $imagem;
+        }
+        //Coisas dos comentários
+        $imagensComment = DB::table('imagem_comments')->get();
         foreach ($comments as $comment){
-            if ($comment->user_id != '') $user = User::find($comment->user_id);
-            else $user = User::find($comment->instituicao_id);
+            $user = User::find($comment->user_id);
             $users[$user->id] = $user->name;
         }
-        return view('post', compact('id','nome', 'comments', 'users','imagensComment','success'));
+        return view('post', compact('id','nome', 'comments', 'users','imagensComment','success', 'post','author_post', 'imagensPost'));
     }
 
     /**
