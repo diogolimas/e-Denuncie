@@ -1,5 +1,5 @@
 <img src="https://github.com/diogolimas/e-Denuncie/blob/master/public/img/logo_f_black.png" width="80px" style="margin-left:auto;margin-right:auto;"></img>
-![](https://github.com/diogolimas/e-Denuncie/blob/master/public/img/logo_f_black.png =100x)
+
 # e-Denuncie: rede social para denúncias com indicadores 
 ###  Projeto criado para o evento Hackfest (2019), do Ministério Público do Rio Grande do Norte
 ####  Equipe de desenvolvimento:
